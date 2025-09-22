@@ -1,7 +1,7 @@
 Write-Host "Starting CourierXpress Project..." -ForegroundColor Green
 
 Write-Host "Clearing caches..." -ForegroundColor Yellow
-Set-Location "d:\Xampp\htdocs\eprojectv2\Project - Copy"
+Set-Location "d:\XAMPP\htdocs\CourierV2"
 & "d:\xampp\php\php.exe" artisan config:clear
 & "d:\xampp\php\php.exe" artisan route:clear
 & "d:\xampp\php\php.exe" artisan view:clear

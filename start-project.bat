@@ -2,7 +2,7 @@
 echo Starting CourierXpress Project...
 
 echo Clearing caches...
-cd /d "d:\Xampp\htdocs\eprojectv2\Project - Copy"
+cd /d "d:\XAMPP\htdocs\CourierV2"
 "d:\xampp\php\php.exe" artisan config:clear
 "d:\xampp\php\php.exe" artisan route:clear
 "d:\xampp\php\php.exe" artisan view:clear
