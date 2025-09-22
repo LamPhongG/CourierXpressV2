@@ -2,6 +2,67 @@
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<!-- Hero Banner Section - Chỉ ảnh thuần túy -->
+<div class="relative h-screen overflow-hidden">
+    <!-- Ảnh banner toàn màn hình -->
+    <img src="{{ asset('images/1.jpg') }}" 
+         alt="CourierXpress - Dịch vụ giao hàng chuyên nghiệp" 
+         class="w-full h-full object-cover">
+</div>
+
+<!-- Tracking Section - Căn giữa -->
+<div class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-sans text-gray-800 mb-4">Theo Dõi Đơn Hàng</h2>
+<p class="text-xl font-sans text-gray-600 mb-12">Nhập mã vận đơn để theo dõi tình trạng giao hàng real-time</p>
+
+            
+            <!-- Enhanced tracking form -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
+                <form id="trackingForm" class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+                    @csrf
+                    <input type="text" id="tracking_id" name="tracking_id" placeholder="Nhập mã theo dõi (VD: CX123456789)..."
+                           class="flex-1 px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-lg transition-all duration-300">
+                    <button type="submit"
+                            class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <span class="flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <span>TÌM KIẾM</span>
+                        </span>
+                    </button>
+                </form>
+                
+                <!-- Tracking Result Display -->
+                <div id="trackingResult" class="mt-6 hidden">
+                    <!-- Success Result -->
+                    <div id="trackingSuccess" class="bg-green-50 border border-green-200 rounded-xl p-6 hidden relative">
+                        <button onclick="closeTrackingResult()" class="absolute top-4 right-4 text-green-600 hover:text-green-800 text-xl font-bold">&times;</button>
+                        <h4 class="text-green-800 font-bold mb-3 text-lg">✅ Tìm thấy đơn hàng!</h4>
+                        <div id="orderDetails" class="text-green-700"></div>
+                    </div>
+                    
+                    <!-- Error Result -->
+                    <div id="trackingError" class="bg-red-50 border border-red-200 rounded-xl p-6 hidden">
+                        <h4 class="text-red-800 font-bold mb-3 text-lg">❌ Không tìm thấy đơn hàng</h4>
+                        <p class="text-red-700">Mã vận đơn không tồn tại trong hệ thống. Vui lòng kiểm tra lại mã theo dõi.</p>
+                    </div>
+                    
+                    <!-- Loading -->
+                    <div id="trackingLoading" class="bg-blue-50 border border-blue-200 rounded-xl p-6 hidden">
+                        <h4 class="text-blue-800 font-bold mb-3 text-lg">🔍 Đang tìm kiếm...</h4>
+                        <p class="text-blue-700">Vui lòng đợi trong giây lát...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <style>
 /* Enhanced modal styles for better visibility and priority */
 .modal-overlay {
@@ -97,79 +158,7 @@
 
 </style>
 
-<!-- Background with cyberpunk delivery truck -->
-<div class="home-bg">
-    <!-- Success message for logout -->
-    @if(session('success'))
-        <div id="logoutNotification" class="fixed top-4 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg">
-            <div class="flex items-center">
-                <i class="fas fa-check-circle mr-2"></i>
-                {{ session('success') }}
-            </div>
-        </div>
-        <script>
-            // Auto-hide notification after 5 seconds
-            setTimeout(function() {
-                const notification = document.getElementById('logoutNotification');
-                if (notification) {
-                    notification.style.display = 'none';
-                }
-            }, 5000);
-        </script>
-    @endif
-    
-    <!-- Content wrapper -->
-    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen pt-6 px-4">
-        <div class="text-center mb-12">
-            <h1 class="text-6xl font-medium text-orange-500 mb-6">
-               CourierXpress
-            </h1>
-            <p class="text-2xl font-medium text-orange-300 mb-8">Giao Hàng Tương Lai</p>
-        </div>
 
-        {{-- 3 box menu with cyberpunk styling --}}<h3 class="text-2xl font-bold text-white mb-6 text-center">
-        <div class="mb-12">
-            {{-- Menu boxes removed as requested --}}
-        </div>
-
-        {{-- Enhanced tracking form --}}
-        <div>
-            <h3 class="text-2xl text-red-600 font-medium text-white mb-6 text-center">THEO DÕI ĐƠN HÀNG</h3>
-            <form id="trackingForm" class="flex shadow-2xl rounded-xl overflow-hidden">
-                @csrf
-                <input type="text" id="tracking_id" name="tracking_id" placeholder="Nhập mã theo dõi..."
-                       class="px-6 py-4 w-96 border-0 focus:outline-none focus:ring-2 focus:ring-orange-400 bg-gray-800 bg-opacity-80 text-white placeholder-gray-300 text-lg">
-                <button type="submit"
-                        class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 font-bold flex items-center justify-center hover:from-orange-400 hover:to-red-400 transition-all duration-300">
-                    <span class="text-lg text-red-600 font-medium">THEO DÕI →</span>
-                </button>
-            </form>
-            
-            <!-- Tracking Result Display -->
-            <div id="trackingResult" class="mt-4 hidden">
-                <!-- Success Result -->
-                <div id="trackingSuccess" class="bg-green-900 bg-opacity-50 border border-green-400 rounded-lg p-4 hidden relative">
-                    <button onclick="closeTrackingResult()" class="absolute top-2 right-2 text-green-200 hover:text-white text-xl font-bold">&times;</button>
-                    <h4 class="text-green-200 font-bold mb-2">✅ Tìm thấy đơn hàng!</h4>
-                    <div id="orderDetails" class="text-green-100 text-sm"></div>
-                </div>
-                
-                <!-- Error Result -->
-                <div id="trackingError" class="bg-red-900 bg-opacity-50 border border-red-400 rounded-lg p-4 hidden">
-                    <h4 class="text-red-200 font-bold mb-2">❌ Không tìm thấy đơn hàng</h4>
-                    <p class="text-red-100 text-sm">Mã vận đơn không tồn tại trong hệ thống. Vui lòng kiểm tra lại mã theo dõi.</p>
-                </div>
-                
-                <!-- Loading -->
-                <div id="trackingLoading" class="bg-blue-900 bg-opacity-50 border border-blue-400 rounded-lg p-4 hidden">
-                    <h4 class="text-blue-200 font-bold mb-2">🔍 Đang tìm kiếm...</h4>
-                    <p class="text-blue-100 text-sm">Vui lòng đợi trong giây lát...</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <!-- Login/Register Modal -->
 <div id="authModal" class="fixed inset-0 z-50 modal-overlay hidden flex items-center justify-center">
