@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,27 +124,27 @@
                     </a>
                     <a href="/admin/orders" class="sidebar-menu-item {{ request()->is('admin/orders*') ? 'active' : '' }}">
                         <i class="fas fa-box w-6"></i>
-                        <span class="ml-3">Đơn hàng</span>
+                        <span class="ml-3">Orders</span>
                     </a>
                     <a href="/admin/users" class="sidebar-menu-item {{ request()->is('admin/users*') ? 'active' : '' }}">
                         <i class="fas fa-users w-6"></i>
-                        <span class="ml-3">Người dùng</span>
+                        <span class="ml-3">Users</span>
                     </a>
                     <a href="/admin/drivers" class="sidebar-menu-item {{ request()->is('admin/drivers*') ? 'active' : '' }}">
                         <i class="fas fa-truck w-6"></i>
-                        <span class="ml-3">Tài xế</span>
+                        <span class="ml-3">Drivers</span>
                     </a>
                     <a href="/admin/tracking" class="sidebar-menu-item {{ request()->is('admin/tracking*') ? 'active' : '' }}">
                         <i class="fas fa-map-marker-alt w-6"></i>
-                        <span class="ml-3">Theo dõi</span>
+                        <span class="ml-3">Tracking</span>
                     </a>
                     <a href="/admin/reports" class="sidebar-menu-item {{ request()->is('admin/reports*') ? 'active' : '' }}">
                         <i class="fas fa-chart-bar w-6"></i>
-                        <span class="ml-3">Báo cáo</span>
+                        <span class="ml-3">Reports</span>
                     </a>
                     <a href="/admin/settings" class="sidebar-menu-item {{ request()->is('admin/settings*') ? 'active' : '' }}">
                         <i class="fas fa-cog w-6"></i>
-                        <span class="ml-3">Cài đặt</span>
+                        <span class="ml-3">Settings</span>
                     </a>
                 </nav>
             </div>

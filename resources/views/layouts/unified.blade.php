@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
                     
                     <!-- JavaScript Logout Button -->
                     <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
                     </button>
                     
                     <!-- Alternative: Direct Form Logout (for testing) -->
@@ -62,7 +62,7 @@
                     <form method="POST" action="/eprojectv2/CourierXpress/Project/public/logout" style="display: inline;">
                         @csrf
                         <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-                            <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất (Test)
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout (Test)
                         </button>
                     </form>
                     -->
@@ -98,41 +98,44 @@
 
     <!-- Common Scripts -->
     <script>
+        // Bootstrap auth context into JS (avoid Blade directives inside logic)
+        const IS_AUTH_STR = "{{ auth()->check() ? '1' : '0' }}";
+        const IS_AUTH = IS_AUTH_STR === '1';
+        const AUTH_USER = IS_AUTH ? {
+            id: "{{ auth()->check() ? auth()->user()->id : '' }}",
+            name: "{{ auth()->check() ? addslashes(auth()->user()->name) : '' }}",
+            email: "{{ auth()->check() ? addslashes(auth()->user()->email) : '' }}",
+            role: "{{ auth()->check() ? addslashes(auth()->user()->role) : '' }}",
+            status: "{{ auth()->check() ? addslashes(auth()->user()->status ?? 'active') : '' }}"
+        } : null;
+
         // Laravel session authentication check and localStorage sync
-        @if(auth()->check())
-        // Store Laravel session data in localStorage for compatibility
-        const userData = {
-            id: {{ auth()->user()->id }},
-            name: "{{ auth()->user()->name }}",
-            email: "{{ auth()->user()->email }}",
-            role: "{{ auth()->user()->role }}",
-            status: "{{ auth()->user()->status ?? 'active' }}"
-        };
-        
-        localStorage.setItem('user_data', JSON.stringify(userData));
-        localStorage.setItem('auth_token', 'laravel_session_' + userData.id);
-        
-        // Update user name in header
-        document.addEventListener('DOMContentLoaded', function() {
-            const userNameEl = document.getElementById('userName');
-            if (userNameEl) {
-                userNameEl.textContent = userData.name;
-            }
-        });
-        @else
-        // Clear localStorage if not authenticated and redirect
-        localStorage.removeItem('user_data');
-        localStorage.removeItem('auth_token');
-        window.location.href = '/login';
-        @endif
+        if (IS_AUTH) {
+            const userData = AUTH_USER;
+            localStorage.setItem('user_data', JSON.stringify(userData));
+            localStorage.setItem('auth_token', 'laravel_session_' + userData.id);
+
+            // Update user name in header
+            document.addEventListener('DOMContentLoaded', function() {
+                const userNameEl = document.getElementById('userName');
+                if (userNameEl && userData && userData.name) {
+                    userNameEl.textContent = userData.name;
+                }
+            });
+        } else {
+            // Clear localStorage if not authenticated and redirect
+            localStorage.removeItem('user_data');
+            localStorage.removeItem('auth_token');
+            window.location.href = '/login';
+        }
         
         // Common functions
         function logout() {
-            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+            if (confirm('Are you sure you want to logout?')) {
                 // Show loading indicator
                 const button = event.target;
                 const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang đăng xuất...';
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging out...';
                 button.disabled = true;
                 
                 // Clear localStorage
@@ -155,11 +158,12 @@
 
         // Check authentication - now works with Laravel session
         function checkAuth(requiredRole = null) {
-            @if(auth()->check())
-            const user = {
-                role: "{{ auth()->user()->role }}"
-            };
-            
+            if (!IS_AUTH) {
+                window.location.href = '/login';
+                return;
+            }
+
+            const user = { role: AUTH_USER ? AUTH_USER.role : null };
             if (requiredRole && user.role !== requiredRole) {
                 // Redirect to appropriate dashboard based on actual role
                 if (user.role === 'admin') {
@@ -174,15 +178,11 @@
                     window.location.href = '/login';
                 }
             }
-            @else
-            // Not authenticated via Laravel session
-            window.location.href = '/login';
-            @endif
         }
 
         // Format currency
         function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', { 
+            return new Intl.NumberFormat('en-US', { 
                 style: 'currency', 
                 currency: 'VND' 
             }).format(amount);
@@ -190,7 +190,7 @@
 
         // Format date
         function formatDate(dateString) {
-            return new Date(dateString).toLocaleDateString('vi-VN', {
+            return new Date(dateString).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',

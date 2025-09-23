@@ -10,13 +10,13 @@
                     <img src="{{ asset('images/baohop.png') }}" alt="Logo" class="h-14 w-18 ">
 
                     <p class="text-sm text-gray-600 leading-relaxed mb-4">
-                        CÔNG TY TNHH MỘT THÀNH VIÊN CHUYỂN PHÁT NHANH HỢP PHONG PHÚC
+                        CourierXpress Logistics Co., Ltd.
                     </p>
                 </div>
                 
                 <div class="text-sm text-gray-600 space-y-2">
-                    <p>Giấy CNĐKKD: 0313617136 - Ngày cấp: 13/01/2016, đăng ký thay đổi lần 06 ngày 25/09/2018</p>
-                    <p>Cơ Quan Cấp: Phòng Đăng ký kinh doanh - Sở kế hoạch và đầu tư TP Hồ Chí Minh</p>
+                    <p>Business Registration: 0313617136 - Issued: 13/01/2016, latest update 25/09/2018</p>
+                    <p>Issuing Authority: Department of Planning and Investment, Ho Chi Minh City</p>
                 </div>
                 
                 <!-- Certification Badge -->
@@ -25,29 +25,29 @@
                         <svg class="w-8 h-8 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="text-xs font-medium text-blue-800">ĐÃ THÔNG BÁO<br>BỘ CÔNG THƯƠNG</span>
+                        <span class="text-xs font-medium text-blue-800">CERTIFIED<br>MINISTRY OF INDUSTRY & TRADE</span>
                     </div>
                 </div>
             </div>
             
             <!-- Quick Access -->
             <div>
-                <h4 class="text-lg font-bold text-gray-800 mb-6">TRUY CẬP NHANH</h4>
+                <h4 class="text-lg font-bold text-gray-800 mb-6">QUICK ACCESS</h4>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Trung tâm chăm sóc khách hàng</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Liên hệ với chúng tôi</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Chính sách</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Chính sách khiếu nại</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Điều khoản chung</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Customer Care Center</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Contact Us</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Policies</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Complaint Policy</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">General Terms</a></li>
                 </ul>
                 
                 <div class="mt-6">
-                    <h5 class="font-bold text-gray-800 mb-3">Thông tin công ty</h5>
+                    <h5 class="font-bold text-gray-800 mb-3">Company Information</h5>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Câu chuyện thương hiệu</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Tầm nhìn và giá trị cốt lõi</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Lịch sử phát triển</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Mạng lưới và Quy mô</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Brand Story</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Vision & Core Values</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Development History</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Network & Scale</a></li>
                     </ul>
                 </div>
             </div>
@@ -56,15 +56,15 @@
             <div>
                 <h4 class="text-lg font-bold text-gray-800 mb-6">BLOG</h4>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Tin tức nổi bật</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Báo chí nói về chúng tôi</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Featured News</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">Press About Us</a></li>
                     <li><a href="#" class="text-gray-600 hover:text-orange-500 transition duration-300">CourierXpress Magazine</a></li>
                 </ul>
             </div>
             
             <!-- Contact Info -->
             <div>
-                <h4 class="text-lg font-bold text-gray-800 mb-6">THÔNG TIN LIÊN HỆ</h4>
+                <h4 class="text-lg font-bold text-gray-800 mb-6">CONTACT INFORMATION</h4>
                 <div class="space-y-4">
                     <div class="flex items-start">
                         <svg class="w-5 h-5 text-orange-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -85,13 +85,13 @@
                         <svg class="w-5 h-5 text-orange-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="text-gray-600">10 Mai Chí Thọ, P. Thủ Thiêm, Thành phố Thủ Đức, TP. HCM</span>
+                        <span class="text-gray-600">10 Mai Chi Tho, Thu Thiem Ward, Thu Duc City, Ho Chi Minh City</span>
                     </div>
                 </div>
                 
                 <!-- Mobile Apps -->
                 <div class="mt-8">
-                    <h5 class="font-bold text-gray-800 mb-4">TẢI ỨNG DỤNG</h5>
+                    <h5 class="font-bold text-gray-800 mb-4">DOWNLOAD APP</h5>
                     <div class="flex flex-col space-y-3">
                         <!-- QR Code -->
                         <div class="bg-white p-3 rounded-lg border border-gray-200 w-20 h-20 flex items-center justify-center">

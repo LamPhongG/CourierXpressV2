@@ -126,8 +126,8 @@
                 <i class="fas fa-arrow-left text-xl"></i>
             </a>
             <div>
-                <h1 class="text-2xl font-bold mb-2">Tạo đơn hàng mới</h1>
-                <p class="text-blue-100">Nhập thông tin đầy đủ để tạo đơn hàng</p>
+                <h1 class="text-2xl font-bold mb-2">Create new order</h1>
+                <p class="text-blue-100">Enter all information to create the order</p>
             </div>
         </div>
     </div>
@@ -140,24 +140,24 @@
             <div class="form-section">
                 <h3 class="form-section-title">
                     <i class="fas fa-map-marker-alt"></i>
-                    Thông tin lấy hàng
+                    Pickup information
                 </h3>
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div>
-                        <label for="pickupName" class="form-label required">Tên người gửi</label>
+                        <label for="pickupName" class="form-label required">Sender name</label>
                         <input type="text" id="pickupName" name="pickup_name" required class="form-input">
                     </div>
                     <div>
-                        <label for="pickupPhone" class="form-label required">Số điện thoại</label>
+                        <label for="pickupPhone" class="form-label required">Phone number</label>
                         <input type="tel" id="pickupPhone" name="pickup_phone" required class="form-input">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="pickupAddress" class="form-label required">Địa chỉ</label>
-                        <input type="text" id="pickupAddress" name="pickup_address" required class="form-input" placeholder="Nhập địa chỉ lấy hàng đầy đủ">
+                        <label for="pickupAddress" class="form-label required">Address</label>
+                        <input type="text" id="pickupAddress" name="pickup_address" required class="form-input" placeholder="Enter full pickup address">
                     </div>
                 </div>
                 <div class="mt-4">
-                    <label class="form-label">Vị trí trên bản đồ (kéo thả để chỉnh sửa)</label>
+                    <label class="form-label">Map location (drag to adjust)</label>
                     <div id="pickupMap" class="h-60 rounded-lg border-2 border-gray-200"></div>
                     <input type="hidden" id="pickupLat" name="pickup_lat">
                     <input type="hidden" id="pickupLng" name="pickup_lng">
@@ -168,24 +168,24 @@
             <div class="form-section">
                 <h3 class="form-section-title">
                     <i class="fas fa-shipping-fast"></i>
-                    Thông tin giao hàng
+                    Delivery information
                 </h3>
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div>
-                        <label for="deliveryName" class="form-label required">Tên người nhận</label>
+                        <label for="deliveryName" class="form-label required">Receiver name</label>
                         <input type="text" id="deliveryName" name="delivery_name" required class="form-input">
                     </div>
                     <div>
-                        <label for="deliveryPhone" class="form-label required">Số điện thoại</label>
+                        <label for="deliveryPhone" class="form-label required">Phone number</label>
                         <input type="tel" id="deliveryPhone" name="delivery_phone" required class="form-input">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="deliveryAddress" class="form-label required">Địa chỉ</label>
-                        <input type="text" id="deliveryAddress" name="delivery_address" required class="form-input" placeholder="Nhập địa chỉ giao hàng đầy đủ">
+                        <label for="deliveryAddress" class="form-label required">Address</label>
+                        <input type="text" id="deliveryAddress" name="delivery_address" required class="form-input" placeholder="Enter full delivery address">
                     </div>
                 </div>
                 <div class="mt-4">
-                    <label class="form-label">Vị trí trên bản đồ (kéo thả để chỉnh sửa)</label>
+                    <label class="form-label">Map location (drag to adjust)</label>
                     <div id="deliveryMap" class="h-60 rounded-lg border-2 border-gray-200"></div>
                     <input type="hidden" id="deliveryLat" name="delivery_lat">
                     <input type="hidden" id="deliveryLng" name="delivery_lng">
@@ -196,35 +196,35 @@
             <div class="form-section">
                 <h3 class="form-section-title">
                     <i class="fas fa-box"></i>
-                    Thông tin kiện hàng
+                    Package information
                 </h3>
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div>
-                        <label for="packageType" class="form-label required">Loại hàng</label>
+                        <label for="packageType" class="form-label required">Package type</label>
                         <select id="packageType" name="package_type" required class="form-input">
-                            <option value="" disabled selected>Chọn loại hàng</option>
-                            <option value="document">Tài liệu</option>
-                            <option value="parcel">Bưu kiện</option>
-                            <option value="food">Thực phẩm</option>
-                            <option value="fragile">Hàng dễ vỡ</option>
-                            <option value="other">Khác</option>
+                            <option value="" disabled selected>Select package type</option>
+                            <option value="document">Document</option>
+                            <option value="parcel">Parcel</option>
+                            <option value="food">Food</option>
+                            <option value="fragile">Fragile</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <div>
-                        <label for="weight" class="form-label required">Khối lượng (kg)</label>
-                        <input type="number" step="0.1" min="0.1" id="weight" name="weight" required class="form-input" placeholder="Ví dụ: 2.5">
+                        <label for="weight" class="form-label required">Weight (kg)</label>
+                        <input type="number" step="0.1" min="0.1" id="weight" name="weight" required class="form-input" placeholder="e.g., 2.5">
                     </div>
                     <div>
-                        <label for="value" class="form-label required">Giá trị hàng (VNĐ)</label>
-                        <input type="number" min="0" id="value" name="value" required class="form-input" placeholder="Ví dụ: 500000">
+                        <label for="value" class="form-label required">Declared value (VND)</label>
+                        <input type="number" min="0" id="value" name="value" required class="form-input" placeholder="e.g., 500000">
                     </div>
                     <div>
-                        <label for="codAmount" class="form-label">Thu hộ COD (VNĐ)</label>
-                        <input type="number" min="0" id="codAmount" name="cod_amount" class="form-input" placeholder="Để trống nếu không có">
+                        <label for="codAmount" class="form-label">COD amount (VND)</label>
+                        <input type="number" min="0" id="codAmount" name="cod_amount" class="form-input" placeholder="Leave empty if not applicable">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="notes" class="form-label">Ghi chú</label>
-                        <textarea id="notes" name="notes" rows="3" class="form-input" placeholder="Ghi chú thêm về kiện hàng (nếu có)"></textarea>
+                        <label for="notes" class="form-label">Notes</label>
+                        <textarea id="notes" name="notes" rows="3" class="form-input" placeholder="Additional notes about the package (optional)"></textarea>
                     </div>
                 </div>
             </div>
@@ -233,20 +233,20 @@
             <div class="form-section">
                 <h3 class="form-section-title">
                     <i class="fas fa-truck"></i>
-                    Dịch vụ vận chuyển
+                    Shipping services
                 </h3>
                 <div class="space-y-4">
                     <div id="shippingServices" class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <!-- Shipping services will be dynamically added here -->
                         <div class="text-center py-8 text-gray-500 sm:col-span-3">
                             <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
-                            <p>Đang tính toán phí vận chuyển...</p>
-                            <p class="text-sm mt-1">Vui lòng nhập đầy đủ thông tin để xem các gói dịch vụ</p>
+                            <p>Calculating shipping fee...</p>
+                            <p class="text-sm mt-1">Please enter all required information to view service options</p>
                         </div>
                     </div>
                     <div id="shippingFee" class="text-xl font-medium text-gray-900 hidden bg-blue-50 p-4 rounded-lg border border-blue-200">
                         <i class="fas fa-dollar-sign text-blue-600 mr-2"></i>
-                        Phí vận chuyển: <span id="shippingFeeAmount" class="text-blue-600 font-bold">0</span> đ
+                        Shipping fee: <span id="shippingFeeAmount" class="text-blue-600 font-bold">0</span> ₫
                     </div>
                 </div>
             </div>
@@ -255,7 +255,7 @@
             <div class="flex justify-end pt-4">
                 <button type="submit" class="btn-primary">
                     <i class="fas fa-plus mr-2"></i>
-                    Tạo đơn hàng
+                    Create order
                 </button>
             </div>
         </form>
@@ -389,9 +389,9 @@
     
     function showDefaultServices() {
         const defaultServices = [
-            { id: 'standard', name: 'Gối chuẩn', description: 'Giao hàng trong 1-2 ngày', fee: 30000, estimated_time: '1-2 ngày', recommended: true },
-            { id: 'fast', name: 'Gối nhanh', description: 'Giao hàng trong ngày', fee: 50000, estimated_time: 'Trong ngày', recommended: false },
-            { id: 'express', name: 'Gối hỏa tốc', description: 'Giao hàng trong 2-4 giờ', fee: 80000, estimated_time: '2-4 giờ', recommended: false }
+            { id: 'standard', name: 'Standard', description: 'Delivery within 1-2 days', fee: 30000, estimated_time: '1-2 days', recommended: true },
+            { id: 'fast', name: 'Fast', description: 'Same-day delivery', fee: 50000, estimated_time: 'Same day', recommended: false },
+            { id: 'express', name: 'Express', description: 'Delivery within 2-4 hours', fee: 80000, estimated_time: '2-4 hours', recommended: false }
         ];
         renderShippingServices(defaultServices);
     }
@@ -403,18 +403,18 @@
         services.forEach((service, index) => {
             const serviceCard = `
                 <div class="service-card ${service.recommended ? 'selected' : ''}" data-service="${service.id}">
-                    ${service.recommended ? '<div class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-2 py-1 text-xs rounded-full font-semibold">Khuyến nghị</div>' : ''}
+                    ${service.recommended ? '<div class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-2 py-1 text-xs rounded-full font-semibold">Recommended</div>' : ''}
                     <div class="flex items-center">
                         <input type="radio" name="shipping_service" value="${service.id}" class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300" ${service.recommended ? 'checked' : ''}>
                         <div class="ml-4 flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <label class="font-bold text-gray-900 text-lg">${service.name}</label>
-                                <span class="text-lg font-bold text-blue-600">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(service.fee)}</span>
+                                <span class="text-lg font-bold text-blue-600">${new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(service.fee)}</span>
                             </div>
                             <p class="text-sm text-gray-600 mb-2">${service.description}</p>
                             <div class="flex items-center text-xs text-gray-500">
                                 <i class="fas fa-clock mr-1"></i>
-                                <span>Thời gian: ${service.estimated_time}</span>
+                                <span>ETA: ${service.estimated_time}</span>
                             </div>
                         </div>
                     </div>
@@ -433,13 +433,13 @@
         // Show shipping fee section
         $('#shippingFee').removeClass('hidden');
         const initialService = services.find(s => s.recommended) || services[0];
-        $('#shippingFeeAmount').text(new Intl.NumberFormat('vi-VN').format(initialService.fee));
+        $('#shippingFeeAmount').text(new Intl.NumberFormat('en-US').format(initialService.fee));
 
         // Update fee when service selection changes
         $('input[name="shipping_service"]').on('change', function() {
             const selectedService = services.find(s => s.id === $(this).val());
             if (selectedService) {
-                $('#shippingFeeAmount').text(new Intl.NumberFormat('vi-VN').format(selectedService.fee));
+                $('#shippingFeeAmount').text(new Intl.NumberFormat('en-US').format(selectedService.fee));
             }
         });
     }
@@ -493,7 +493,7 @@
                     }, 500);
                 }
                 
-                alert('⚠️ Vui lòng điền đầy đủ các thông tin bắt buộc (đánh dấu *)!');
+                alert('⚠️ Please fill in all required fields (marked with *)!');
                 return;
             }
 
@@ -520,7 +520,7 @@
             const submitBtn = $(this).find('button[type="submit"]');
             const originalHtml = submitBtn.html();
             submitBtn.prop('disabled', true)
-                     .html('<i class="fas fa-spinner fa-spin mr-2"></i>Đang tạo...')
+                     .html('<i class="fas fa-spinner fa-spin mr-2"></i>Creating...')
                      .addClass('opacity-75');
 
             fetch('/api/user/orders', {
@@ -536,31 +536,31 @@
                     if (response.ok) {
                         return data;
                     } else {
-                        throw new Error(data.message || 'Lỗi khi tạo đơn hàng');
+                        throw new Error(data.message || 'Error creating order');
                     }
                 });
             })
             .then(data => {
                 if (data.success && data.data && data.data.id) {
                     // Success - show detailed message
-                    const message = `Đơn hàng được tạo thành công!\nMã vận đơn: ${data.data.tracking_number || data.data.id}`;
+                    const message = `Order created successfully!\nTracking number: ${data.data.tracking_number || data.data.id}`;
                     alert(message);
                     
                     // Redirect to order details or orders list
                     window.location.href = `/user/orders/${data.data.id}`;
                 } else {
-                    throw new Error(data.message || 'Phản hồi từ server không hợp lệ');
+                    throw new Error(data.message || 'Invalid server response');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 
-                let errorMessage = 'Có lỗi xảy ra khi tạo đơn hàng!';
+                let errorMessage = 'An error occurred while creating the order!';
                 
                 if (error.message.includes('422') || error.message.includes('validation')) {
-                    errorMessage = 'Vui lòng kiểm tra lại các thông tin đã nhập!';
+                    errorMessage = 'Please review the entered information!';
                 } else if (error.message.includes('401') || error.message.includes('403')) {
-                    errorMessage = 'Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại!';
+                    errorMessage = 'Your session has expired. Please sign in again!';
                     setTimeout(() => {
                         window.location.href = '/login';
                     }, 2000);

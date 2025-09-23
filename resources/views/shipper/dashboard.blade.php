@@ -12,9 +12,9 @@
 
 @section('navigation')
     <a href="/shipper/dashboard" class="text-red-600 font-medium">Dashboard</a>
-    <a href="/shipper/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/shipper/history" class="text-gray-700 hover:text-red-600">Lịch sử</a>
-    <a href="/tracking" class="text-gray-700 hover:text-red-600">Tra cứu</a>
+    <a href="/shipper/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/shipper/history" class="text-gray-700 hover:text-red-600">History</a>
+    <a href="/tracking" class="text-gray-700 hover:text-red-600">Track</a>
 @endsection
 
 @section('content')
@@ -22,8 +22,8 @@
     <div class="mb-8">
         <div class="bg-gradient-to-r from-green-500 to-teal-600 rounded-lg shadow-lg p-6 text-white">
             <h1 class="text-2xl font-bold mb-2">Shipper Dashboard</h1>
-            <p class="text-green-100">Chào mừng, {{ auth()->user()->name }}! Quản lý giao hàng và cập nhật trạng thái đơn hàng</p>
-            <p class="text-sm text-green-100 mt-2">{{ auth()->user()->email }} • Shipper • {{ auth()->user()->city ?? 'Chưa cập nhật' }}</p>
+            <p class="text-green-100">Welcome, {{ auth()->user()->name }}! Manage deliveries and update order status</p>
+            <p class="text-sm text-green-100 mt-2">{{ auth()->user()->email }} • Shipper • {{ auth()->user()->city ?? 'Not updated' }}</p>
             <div class="mt-4 flex items-center space-x-4">
                 <div class="flex items-center space-x-2">
                     <i class="fas fa-clock"></i>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex items-center space-x-2">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span id="currentLocation">Đang lấy vị trí...</span>
+                    <span id="currentLocation">Fetching location...</span>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Đơn cần giao</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Orders to deliver</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ $pendingOrders ?? 0 }}</dd>
                         </dl>
                     </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Đang vận chuyển</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">In transit</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ $inProgressOrders ?? 0 }}</dd>
                         </dl>
                     </div>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Hoàn thành hôm nay</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Completed today</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ $completedToday ?? 0 }}</dd>
                         </dl>
                     </div>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Đánh giá</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Rating</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ number_format($averageRating ?? 5.0, 1) }}★</dd>
                         </dl>
                     </div>
@@ -109,11 +109,11 @@
         <div class="lg:col-span-2 bg-white shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                 <div>
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Đơn hàng hiện tại</h3>
-                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Đơn hàng được giao cho bạn</p>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Current orders</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Orders assigned to you</p>
                 </div>
                 <a href="/shipper/orders" class="text-green-600 hover:text-green-500 text-sm font-medium">
-                    Xem tất cả →
+                    View all →
                 </a>
             </div>
             <div class="border-t border-gray-200">
@@ -144,13 +144,13 @@
                                                 'failed' => 'bg-red-100 text-red-800'
                                             ];
                                             $statusTexts = [
-                                                'assigned' => 'Đã phân công',
-                                                'pickup' => 'Đang lấy hàng',
-                                                'picked_up' => 'Đã lấy hàng',
-                                                'in_transit' => 'Đang vận chuyển',
-                                                'delivering' => 'Đang giao hàng',
-                                                'delivered' => 'Đã giao',
-                                                'failed' => 'Thất bại'
+                                                'assigned' => 'Assigned',
+                                                'pickup' => 'Picking up',
+                                                'picked_up' => 'Picked up',
+                                                'in_transit' => 'In transit',
+                                                'delivering' => 'Delivering',
+                                                'delivered' => 'Delivered',
+                                                'failed' => 'Failed'
                                             ];
                                         @endphp
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $statusColors[$order->status] ?? 'bg-gray-100 text-gray-800' }}">
@@ -168,7 +168,7 @@
                     @else
                         <div class="px-4 py-4 text-center text-gray-500">
                             <i class="fas fa-inbox text-3xl mb-2"></i>
-                            <p>Hiện tại không có đơn hàng nào</p>
+                            <p>No orders at the moment</p>
                         </div>
                     @endif
                 </div>
@@ -178,23 +178,23 @@
         <!-- Quick Actions -->
         <div class="bg-white shadow rounded-lg">
             <div class="px-4 py-5 sm:p-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Thao tác nhanh</h3>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Quick actions</h3>
                 <div class="space-y-3">
                     <button onclick="updateLocation()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
                         <i class="fas fa-map-marker-alt mr-2"></i>
-                        Cập nhật vị trí
+                        Update location
                     </button>
                     <a href="/shipper/orders" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
                         <i class="fas fa-list mr-2"></i>
-                        Xem đơn hàng
+                        View orders
                     </a>
                     <a href="/tracking" class="block w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
                         <i class="fas fa-search mr-2"></i>
-                        Tra cứu đơn hàng
+                        Track orders
                     </a>
                     <button onclick="toggleStatus()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
                         <i class="fas fa-power-off mr-2"></i>
-                        <span id="statusToggleText">Đang rảnh</span>
+                        <span id="statusToggleText">Available</span>
                     </button>
                 </div>
             </div>
@@ -203,15 +203,15 @@
 
     <!-- Recent Activity -->
     <div class="bg-white shadow rounded-lg p-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Hoạt động gần đây</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Recent activity</h3>
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                     <tr>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thời gian</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mã đơn</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hoạt động</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trạng thái</th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order</th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200" id="activityTable">
@@ -233,13 +233,13 @@
                                         'failed' => 'bg-red-100 text-red-800'
                                     ];
                                     $statusTexts = [
-                                        'assigned' => 'Đã phân công',
-                                        'pickup' => 'Đang lấy hàng',
-                                        'picked_up' => 'Đã lấy hàng',
-                                        'in_transit' => 'Đang vận chuyển',
-                                        'delivering' => 'Đang giao hàng',
-                                        'delivered' => 'Đã giao',
-                                        'failed' => 'Thất bại'
+                                        'assigned' => 'Assigned',
+                                        'pickup' => 'Picking up',
+                                        'picked_up' => 'Picked up',
+                                        'in_transit' => 'In transit',
+                                        'delivering' => 'Delivering',
+                                        'delivered' => 'Delivered',
+                                        'failed' => 'Failed'
                                     ];
                                 @endphp
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $statusColors[$activity['status']] ?? 'bg-gray-100 text-gray-800' }}">
@@ -252,7 +252,7 @@
                         <tr>
                             <td colspan="4" class="px-6 py-4 text-center text-gray-500">
                                 <i class="fas fa-clock text-2xl mb-2"></i>
-                                <p>Chưa có hoạt động nào hôm nay</p>
+                                <p>No activity yet today</p>
                             </td>
                         </tr>
                     @endif
@@ -267,19 +267,7 @@
     let currentPosition = null;
     let shipperStatus = 'active';
     
-    // Laravel session authentication check
-    @if(auth()->check())
-    const userData = {
-        id: {{ auth()->user()->id }},
-        name: "{{ auth()->user()->name }}",
-        email: "{{ auth()->user()->email }}",
-        role: "{{ auth()->user()->role }}",
-        status: "{{ auth()->user()->status ?? 'active' }}"
-    };
-    
-    localStorage.setItem('user_data', JSON.stringify(userData));
-    localStorage.setItem('auth_token', 'laravel_session_' + userData.id);
-    
+    // Initialize page data
     document.addEventListener('DOMContentLoaded', function() {
         updateCurrentTime();
         setInterval(updateCurrentTime, 1000);
@@ -289,14 +277,11 @@
             window.location.reload();
         }, 30000);
     });
-    @else
-    window.location.href = '/login';
-    @endif
     
     // Update current time
     function updateCurrentTime() {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('vi-VN', {
+        const timeString = now.toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit'
@@ -323,25 +308,23 @@
 
     function getStatusText(status) {
         const texts = {
-            'assigned': 'Đã phân công',
-            'pickup': 'Đang lấy hàng',
-            'picked_up': 'Đã lấy hàng',
-            'in_transit': 'Đang vận chuyển',
-            'delivering': 'Đang giao hàng',
-            'delivered': 'Đã giao',
-            'failed': 'Thất bại'
+            'assigned': 'Assigned',
+            'pickup': 'Picking up',
+            'picked_up': 'Picked up',
+            'in_transit': 'In transit',
+            'delivering': 'Delivering',
+            'delivered': 'Delivered',
+            'failed': 'Failed'
         };
-        return texts[status] || 'Không xác định';
+        return texts[status] || 'Unknown';
     }
     
-    // Status buttons removed - status updates only available in orders page
     function getStatusButtons(order) {
-        // No buttons - read-only status display
         return '';
     }
     
     function formatCurrency(amount) {
-        return new Intl.NumberFormat('vi-VN', { 
+        return new Intl.NumberFormat('en-US', { 
             style: 'currency', 
             currency: 'VND' 
         }).format(amount);
@@ -351,11 +334,10 @@
         window.location.href = `/shipper/orders?highlight=${orderId}`;
     }
     
-
     function updateLocation() {
         if (navigator.geolocation) {
             // Show loading state
-            document.getElementById('currentLocation').textContent = 'Đang lấy vị trí...';
+            document.getElementById('currentLocation').textContent = 'Fetching location...';
             
             navigator.geolocation.getCurrentPosition(
                 async function(position) {
@@ -372,28 +354,28 @@
                     const success = await updateLocationOnServer(currentPosition.latitude, currentPosition.longitude);
                     
                     if (success) {
-                        alert('Vị trí đã được cập nhật thành công!');
+                        alert('Location updated successfully!');
                     } else {
-                        alert('Đã lấy vị trí nhưng không thể cập nhật lên server.');
+                        alert('Location retrieved but could not update on server.');
                     }
                 },
                 function(error) {
                     console.error('Geolocation error:', error);
-                    document.getElementById('currentLocation').textContent = 'Không thể lấy vị trí';
+                    document.getElementById('currentLocation').textContent = 'Unable to get location';
                     
-                    let errorMsg = 'Không thể lấy vị trí. ';
+                    let errorMsg = 'Unable to get location. ';
                     switch(error.code) {
                         case error.PERMISSION_DENIED:
-                            errorMsg += 'Vui lòng cho phép truy cập vị trí.';
+                            errorMsg += 'Please allow location access.';
                             break;
                         case error.POSITION_UNAVAILABLE:
-                            errorMsg += 'Thông tin vị trí không khả dụng.';
+                            errorMsg += 'Location information is unavailable.';
                             break;
                         case error.TIMEOUT:
-                            errorMsg += 'Hết thời gian chờ lấy vị trí.';
+                            errorMsg += 'Timed out while retrieving location.';
                             break;
                         default:
-                            errorMsg += 'Lỗi không xác định.';
+                            errorMsg += 'Unknown error.';
                             break;
                     }
                     alert(errorMsg);
@@ -405,7 +387,7 @@
                 }
             );
         } else {
-            alert('Trình duyệt không hỗ trợ định vị GPS.');
+            alert('Your browser does not support GPS location.');
         }
     }
     
@@ -413,24 +395,11 @@
         shipperStatus = shipperStatus === 'active' ? 'offline' : 'active';
         const toggleText = document.getElementById('statusToggleText');
         if (toggleText) {
-            toggleText.textContent = shipperStatus === 'active' ? 'Đang rảnh' : 'Đang bận';
+            toggleText.textContent = shipperStatus === 'active' ? 'Available' : 'Busy';
         }
-        alert(`Trạng thái đã chuyển thành: ${shipperStatus === 'active' ? 'Đang rảnh' : 'Đang bận'}`);
+        alert(`Status changed to: ${shipperStatus === 'active' ? 'Available' : 'Busy'}`);
     }
     
-    // Load recent activities
-    async function loadRecentActivities() {
-        // This function is now handled by server-side rendering
-        // Keeping for API compatibility if needed
-    }
-    
-    // Display recent activities
-    function displayRecentActivities(activities) {
-        // This function is now handled by server-side rendering
-        // Keeping for API compatibility if needed
-    }
-    
-    // Get current location
     function getCurrentLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -449,7 +418,7 @@
                 },
                 function(error) {
                     console.error('Geolocation error:', error);
-                    document.getElementById('currentLocation').textContent = 'Không thể lấy vị trí';
+                    document.getElementById('currentLocation').textContent = 'Unable to get location';
                 },
                 {
                     enableHighAccuracy: true,
@@ -459,11 +428,10 @@
             );
         } else {
             console.error('Geolocation is not supported');
-            document.getElementById('currentLocation').textContent = 'Không hỗ trợ GPS';
+            document.getElementById('currentLocation').textContent = 'GPS not supported';
         }
     }
     
-    // Update location on server
     async function updateLocationOnServer(latitude, longitude) {
         try {
             const response = await fetch('/shipper/api/location/update', {
@@ -482,18 +450,18 @@
             if (response.ok) {
                 const result = await response.json();
                 if (result.success) {
-                    console.log('Vị trí đã được cập nhật trên server');
+                    console.log('Location updated on server');
                     return true;
                 } else {
-                    console.error('Lỗi cập nhật vị trí:', result.message);
+                    console.error('Update location error:', result.message);
                     return false;
                 }
             } else {
-                console.error('Lỗi API cập nhật vị trí');
+                console.error('API error updating location');
                 return false;
             }
         } catch (error) {
-            console.error('Lỗi kết nối khi cập nhật vị trí:', error);
+            console.error('Connection error while updating location:', error);
             return false;
         }
     }

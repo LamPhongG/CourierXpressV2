@@ -1,17 +1,17 @@
 @extends('layouts.unified')
 
-@section('title', 'Đơn hàng của tôi - CourierXpress')
+@section('title', 'My Orders - CourierXpress')
 
 @section('navigation')
     <a href="/user/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/user/orders" class="text-red-600 font-medium">Đơn hàng</a>
-    <a href="/user/create-order" class="text-gray-700 hover:text-red-600">Tạo đơn</a>
-    <a href="/user/tracking" class="text-gray-700 hover:text-red-600">Tra cứu</a>
-    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Hồ sơ</a>
+    <a href="/user/orders" class="text-red-600 font-medium">Orders</a>
+    <a href="/user/create-order" class="text-gray-700 hover:text-red-600">Create</a>
+    <a href="/user/tracking" class="text-gray-700 hover:text-red-600">Track</a>
+    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Profile</a>
 @endsection
 
 @section('head')
-    <!-- Không cần DataTables, dùng server-side rendering -->
+    <!-- No DataTables needed; using server-side rendering -->
 @endsection
 
 @section('content')
@@ -20,13 +20,13 @@
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold mb-2">Đơn hàng của tôi</h1>
-                    <p class="text-blue-100">Quản lý và theo dõi tất cả đơn hàng của bạn</p>
+                    <h1 class="text-2xl font-bold mb-2">My Orders</h1>
+                    <p class="text-blue-100">Manage and track all your orders</p>
                 </div>
                 <div>
                     <a href="/user/create-order" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-2 px-4 rounded-lg transition-colors">
                         <i class="fas fa-plus mr-2"></i>
-                        Tạo đơn hàng mới
+                        Create new order
                     </a>
                 </div>
             </div>
@@ -34,37 +34,37 @@
     </div>
         <!-- Filters -->
         <div class="bg-white shadow rounded-lg p-6">
-            <h3 class="text-lg font-medium text-gray-900 mb-4">Bộ lọc tìm kiếm</h3>
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Search filters</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700">Trạng thái</label>
+                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                     <select id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                        <option value="">Tất cả</option>
-                        <option value="pending">Chờ xử lý</option>
-                        <option value="pickup">Đang lấy hàng</option>
-                        <option value="delivering">Đang giao</option>
-                        <option value="completed">Hoàn thành</option>
-                        <option value="failed">Thất bại</option>
+                        <option value="">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="pickup">Picking up</option>
+                        <option value="delivering">Delivering</option>
+                        <option value="completed">Completed</option>
+                        <option value="failed">Failed</option>
                     </select>
                 </div>
                 <div>
-                    <label for="dateRange" class="block text-sm font-medium text-gray-700">Thời gian</label>
+                    <label for="dateRange" class="block text-sm font-medium text-gray-700">Date range</label>
                     <select id="dateRange" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                        <option value="">Tất cả</option>
-                        <option value="today">Hôm nay</option>
-                        <option value="last7days">7 ngày qua</option>
-                        <option value="last30days">30 ngày qua</option>
-                        <option value="thisMonth">Tháng này</option>
-                        <option value="lastMonth">Tháng trước</option>
+                        <option value="">All</option>
+                        <option value="today">Today</option>
+                        <option value="last7days">Last 7 days</option>
+                        <option value="last30days">Last 30 days</option>
+                        <option value="thisMonth">This month</option>
+                        <option value="lastMonth">Last month</option>
                     </select>
                 </div>
                 <div>
-                    <label for="sort" class="block text-sm font-medium text-gray-700">Sắp xếp</label>
+                    <label for="sort" class="block text-sm font-medium text-gray-700">Sort</label>
                     <select id="sort" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                        <option value="newest">Mới nhất trước</option>
-                        <option value="oldest">Cũ nhất trước</option>
-                        <option value="highest">Giá trị cao nhất</option>
-                        <option value="lowest">Giá trị thấp nhất</option>
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                        <option value="highest">Highest value</option>
+                        <option value="lowest">Lowest value</option>
                     </select>
                 </div>
             </div>
@@ -72,33 +72,33 @@
 
         <!-- Orders Table -->
         <div class="bg-white shadow rounded-lg p-6">
-            <h3 class="text-lg font-medium text-gray-900 mb-4">Danh sách đơn hàng</h3>
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Order list</h3>
             <table id="ordersTable" class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Mã đơn
+                            Order code
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Ngày tạo
+                            Created at
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Địa chỉ giao
+                            Delivery address
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Shipper
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Giá trị
+                            Value
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Phí ship
+                            Shipping fee
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Trạng thái
+                            Status
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Thao tác
+                            Actions
                         </th>
                     </tr>
                 </thead>
@@ -124,7 +124,7 @@
                                         <div class="text-sm text-gray-500">{{ $order->shipper->phone ?? 'N/A' }}</div>
                                     </div>
                                 @else
-                                    <span class="text-gray-400">Chưa phân công</span>
+                                    <span class="text-gray-400">Unassigned</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -148,16 +148,16 @@
                                         'cancelled' => 'bg-gray-100 text-gray-800'
                                     ];
                                     $statusTexts = [
-                                        'pending' => 'Chờ xử lý',
-                                        'confirmed' => 'Đã xác nhận',
-                                        'assigned' => 'Đã phân công',
-                                        'pickup' => 'Đang lấy hàng',
-                                        'picked_up' => 'Đã lấy hàng',
-                                        'in_transit' => 'Đang vận chuyển',
-                                        'delivering' => 'Đang giao hàng',
-                                        'delivered' => 'Đã giao',
-                                        'failed' => 'Thất bại',
-                                        'cancelled' => 'Đã hủy'
+                                        'pending' => 'Pending',
+                                        'confirmed' => 'Confirmed',
+                                        'assigned' => 'Assigned',
+                                        'pickup' => 'Picking up',
+                                        'picked_up' => 'Picked up',
+                                        'in_transit' => 'In transit',
+                                        'delivering' => 'Delivering',
+                                        'delivered' => 'Delivered',
+                                        'failed' => 'Failed',
+                                        'cancelled' => 'Cancelled'
                                     ];
                                 @endphp
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusColors[$order->status] ?? 'bg-gray-100 text-gray-800' }}">
@@ -166,16 +166,16 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <a href="/tracking?tracking_number={{ $order->tracking_number }}" class="text-blue-600 hover:text-blue-900 mr-2">
-                                    Chi tiết
+                                    Details
                                 </a>
                                 @if($order->status === 'pending')
                                     <button onclick="cancelOrder({{ $order->id }})" class="text-red-600 hover:text-red-900">
-                                        Hủy
+                                        Cancel
                                     </button>
                                 @endif
                                 @if($order->status === 'delivered')
                                     <button onclick="rateOrder({{ $order->id }})" class="text-yellow-600 hover:text-yellow-900">
-                                        Đánh giá
+                                        Rate
                                     </button>
                                 @endif
                             </td>
@@ -184,7 +184,7 @@
                     @else
                         <tr>
                             <td colspan="8" class="px-6 py-4 text-center text-gray-500">
-                                Chưa có đơn hàng nào
+                                No orders yet
                             </td>
                         </tr>
                     @endif
@@ -198,7 +198,7 @@
 @section('scripts')
 <script>
     function cancelOrder(orderId) {
-        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')) {
+        if (confirm('Are you sure you want to cancel this order?')) {
             fetch(`/api/user/orders/${orderId}/cancel`, {
                 method: 'POST',
                 headers: {
@@ -209,22 +209,22 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Đã hủy đơn hàng thành công!');
+                    alert('Order cancelled successfully!');
                     location.reload();
                 } else {
-                    alert('Có lỗi xảy ra: ' + (data.message || 'Không thể hủy đơn hàng'));
+                    alert('An error occurred: ' + (data.message || 'Unable to cancel the order'));
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Có lỗi xảy ra khi hủy đơn hàng!');
+                alert('An error occurred while cancelling the order!');
             });
         }
     }
 
     function rateOrder(orderId) {
         // TODO: Implement rating modal and functionality
-        alert('Đánh giá đơn hàng sẽ được thêm vào sau!');
+        alert('Order rating will be added later!');
     }
 </script>
 @endsection

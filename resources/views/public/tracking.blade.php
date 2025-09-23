@@ -1,12 +1,12 @@
 @extends('layouts.unified')
 
-@section('title', 'Tra cứu đơn hàng - CourierXpress')
+@section('title', 'Track Shipment - CourierXpress')
 
 @section('navigation')
-    <a href="/" class="text-gray-700 hover:text-red-600">Trang chủ</a>
-    <a href="/tracking" class="text-red-600 font-medium">Tra cứu</a>
-    <a href="/login" class="text-gray-700 hover:text-red-600">Đăng nhập</a>
-    <a href="/register" class="text-gray-700 hover:text-red-600">Đăng ký</a>
+    <a href="/" class="text-gray-700 hover:text-red-600">Home</a>
+    <a href="/tracking" class="text-red-600 font-medium">Track</a>
+    <a href="/login" class="text-gray-700 hover:text-red-600">Sign in</a>
+    <a href="/register" class="text-gray-700 hover:text-red-600">Sign up</a>
 @endsection
 
 @section('head')
@@ -86,8 +86,8 @@
     <!-- Search Section -->
     <div class="search-section py-16 mb-8">
         <div class="text-center text-white">
-            <h1 class="text-4xl font-bold mb-4">Tra cứu đơn hàng</h1>
-            <p class="text-xl text-blue-100 mb-8">Nhập mã vận đơn để theo dõi tình trạng gói hàng của bạn</p>
+            <h1 class="text-4xl font-bold mb-4">Track Shipment</h1>
+            <p class="text-xl text-blue-100 mb-8">Enter your tracking number to follow your package status</p>
             
             <!-- Search Form -->
             <div class="max-w-xl mx-auto">
@@ -97,7 +97,7 @@
                             type="text" 
                             id="trackingNumber" 
                             name="tracking_number"
-                            placeholder="Nhập mã vận đơn (ví dụ: CX000001)"
+                            placeholder="Enter tracking number (e.g., CX000001)"
                             class="w-full px-4 py-3 text-gray-900 bg-white rounded-lg focus:ring-4 focus:ring-blue-300 focus:border-transparent"
                             required
                             value="{{ $trackingNumber ?? '' }}"
@@ -108,14 +108,14 @@
                         id="searchBtn"
                         class="px-6 py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 transition-colors pulse-animation"
                     >
-                        <span id="searchText">Tra cứu</span>
+                        <span id="searchText">Search</span>
                     </button>
                 </form>
             </div>
 
             <!-- Quick Search Examples -->
             <div class="mt-8">
-                <p class="text-blue-100 mb-4">Ví dụ mã vận đơn:</p>
+                <p class="text-blue-100 mb-4">Example tracking numbers:</p>
                 <div class="flex flex-wrap justify-center gap-2">
                     <button onclick="quickSearch('CX000001')" class="px-3 py-1 bg-blue-500 bg-opacity-50 rounded-full text-sm hover:bg-opacity-70 transition-colors">
                         CX000001
@@ -136,11 +136,11 @@
         <div class="flex items-center">
             <i class="fas fa-info-circle text-blue-500 text-xl mr-3"></i>
             <div>
-                <h3 class="text-blue-800 font-medium">Đăng nhập để có trải nghiệm tốt hơn</h3>
-                <p class="text-blue-600">Đăng nhập để xem lịch sử đơn hàng, quản lý profile và nhiều tính năng khác.</p>
+                <h3 class="text-blue-800 font-medium">Sign in for a better experience</h3>
+                <p class="text-blue-600">Sign in to view order history, manage your profile, and more.</p>
                 <div class="mt-2">
-                    <a href="/login" class="text-blue-600 hover:text-blue-800 font-medium mr-4">Đăng nhập →</a>
-                    <a href="/register" class="text-blue-600 hover:text-blue-800 font-medium">Đăng ký tài khoản →</a>
+                    <a href="/login" class="text-blue-600 hover:text-blue-800 font-medium mr-4">Sign in →</a>
+                    <a href="/register" class="text-blue-600 hover:text-blue-800 font-medium">Create an account →</a>
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
     <!-- Loading State -->
     <div id="loadingState" class="hidden bg-white rounded-lg shadow p-8 text-center">
         <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-4"></i>
-        <p class="text-gray-600">Đang tìm kiếm thông tin đơn hàng...</p>
+        <p class="text-gray-600">Searching for order information...</p>
     </div>
 
     <!-- Error State -->
@@ -157,8 +157,8 @@
         <div class="flex items-center">
             <i class="fas fa-exclamation-triangle text-red-500 text-xl mr-3"></i>
             <div>
-                <h3 class="text-red-800 font-medium">Không tìm thấy đơn hàng</h3>
-                <p class="text-red-600" id="errorMessage">Vui lòng kiểm tra lại mã vận đơn và thử lại.</p>
+                <h3 class="text-red-800 font-medium">Order not found</h3>
+                <p class="text-red-600" id="errorMessage">Please check the tracking number and try again.</p>
             </div>
         </div>
     </div>
@@ -171,7 +171,7 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">
                     <i class="fas fa-user text-green-500 mr-2"></i>
-                    Thông tin gửi/nhận
+                    Sender/Receiver Information
                 </h3>
                 <div id="senderReceiverInfo">
                     <!-- Details will be inserted here -->
@@ -182,7 +182,7 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">
                     <i class="fas fa-box text-blue-500 mr-2"></i>
-                    Thông tin gói hàng
+                    Package Information
                 </h3>
                 <div id="packageInfo">
                     <!-- Package details will be inserted here -->
@@ -194,7 +194,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-6">
                 <i class="fas fa-route text-purple-500 mr-2"></i>
-                Lịch sử vận chuyển
+                Shipping Timeline
             </h3>
             <div id="timeline" class="space-y-8">
                 <!-- Timeline steps will be inserted here -->
@@ -205,7 +205,7 @@
         <div class="bg-white rounded-lg shadow p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">
                 <i class="fas fa-headset text-orange-500 mr-2"></i>
-                Cần hỗ trợ?
+                Need help?
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
@@ -242,7 +242,7 @@
             const trackingNumber = document.getElementById('trackingNumber').value.trim();
             
             if (!trackingNumber) {
-                alert('Vui lòng nhập mã vận đơn');
+                alert('Please enter a tracking number');
                 return;
             }
             
@@ -287,13 +287,13 @@
         .catch(error => {
             hideLoading();
             console.error('Error:', error);
-            showError('Có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại.');
+            showError('An error occurred while searching. Please try again.');
         });
     }
     
     function showLoading() {
         document.getElementById('searchBtn').disabled = true;
-        document.getElementById('searchText').textContent = 'Đang tìm...';
+        document.getElementById('searchText').textContent = 'Searching...';
         document.getElementById('loadingState').classList.remove('hidden');
         document.getElementById('errorState').classList.add('hidden');
         document.getElementById('resultsSection').classList.add('hidden');
@@ -301,7 +301,7 @@
     
     function hideLoading() {
         document.getElementById('searchBtn').disabled = false;
-        document.getElementById('searchText').textContent = 'Tra cứu';
+        document.getElementById('searchText').textContent = 'Search';
         document.getElementById('loadingState').classList.add('hidden');
     }
     
@@ -316,16 +316,16 @@
         senderReceiverInfo.innerHTML = `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-green-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-green-800 mb-2">Người gửi</h4>
-                    <p class="text-sm"><strong>Tên:</strong> ${data.order.pickup_name}</p>
-                    <p class="text-sm"><strong>SĐT:</strong> ${data.order.pickup_phone}</p>
-                    <p class="text-sm"><strong>Địa chỉ:</strong> ${data.order.pickup_address}</p>
+                    <h4 class="font-semibold text-green-800 mb-2">Sender</h4>
+                    <p class="text-sm"><strong>Name:</strong> ${data.order.pickup_name}</p>
+                    <p class="text-sm"><strong>Phone:</strong> ${data.order.pickup_phone}</p>
+                    <p class="text-sm"><strong>Address:</strong> ${data.order.pickup_address}</p>
                 </div>
                 <div class="bg-blue-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-blue-800 mb-2">Người nhận</h4>
-                    <p class="text-sm"><strong>Tên:</strong> ${data.order.delivery_name}</p>
-                    <p class="text-sm"><strong>SĐT:</strong> ${data.order.delivery_phone}</p>
-                    <p class="text-sm"><strong>Địa chỉ:</strong> ${data.order.delivery_address}</p>
+                    <h4 class="font-semibold text-blue-800 mb-2">Receiver</h4>
+                    <p class="text-sm"><strong>Name:</strong> ${data.order.delivery_name}</p>
+                    <p class="text-sm"><strong>Phone:</strong> ${data.order.delivery_phone}</p>
+                    <p class="text-sm"><strong>Address:</strong> ${data.order.delivery_address}</p>
                 </div>
             </div>
         `;
@@ -335,12 +335,12 @@
         packageInfo.innerHTML = `
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <p class="text-sm"><strong>Loại:</strong> ${data.order.package_type || 'Không xác định'}</p>
-                    <p class="text-sm"><strong>Trọng lượng:</strong> ${data.order.weight || 'N/A'} kg</p>
+                    <p class="text-sm"><strong>Type:</strong> ${data.order.package_type || 'Unknown'}</p>
+                    <p class="text-sm"><strong>Weight:</strong> ${data.order.weight || 'N/A'} kg</p>
                 </div>
                 <div>
-                    <p class="text-sm"><strong>Giá trị COD:</strong> ${Number(data.order.cod_amount || 0).toLocaleString('vi-VN')} ₫</p>
-                    <p class="text-sm"><strong>Phí vận chuyển:</strong> ${Number(data.order.shipping_fee || 0).toLocaleString('vi-VN')} ₫</p>
+                    <p class="text-sm"><strong>COD Amount:</strong> ${Number(data.order.cod_amount || 0).toLocaleString('en-US')} ₫</p>
+                    <p class="text-sm"><strong>Shipping Fee:</strong> ${Number(data.order.shipping_fee || 0).toLocaleString('en-US')} ₫</p>
                 </div>
             </div>
         `;
@@ -363,36 +363,36 @@
             // Create default timeline based on order status
             timeline = [
                 {
-                    status: 'Đặt hàng thành công',
-                    description: 'Đơn hàng đã được tạo và đang chờ xử lý',
-                    timestamp: new Date().toLocaleString('vi-VN'),
+                    status: 'Order placed successfully',
+                    description: 'The order has been created and is pending processing',
+                    timestamp: new Date().toLocaleString('en-US'),
                     completed: true,
                     icon: 'fa-check'
                 },
                 {
-                    status: 'Xác nhận đơn hàng',
-                    description: 'Đơn hàng đã được xác nhận và chuẩn bị giao cho shipper',
+                    status: 'Order confirmed',
+                    description: 'The order has been confirmed and is being prepared for the shipper',
                     timestamp: '',
                     completed: false,
                     icon: 'fa-clipboard-check'
                 },
                 {
-                    status: 'Đang lấy hàng',
-                    description: 'Shipper đang trên đường đến địa chỉ lấy hàng',
+                    status: 'Picking up',
+                    description: 'The shipper is on the way to the pickup address',
                     timestamp: '',
                     completed: false,
                     icon: 'fa-truck-pickup'
                 },
                 {
-                    status: 'Đang vận chuyển',
-                    description: 'Hàng hóa đang được vận chuyển đến địa chỉ giao hàng',
+                    status: 'In transit',
+                    description: 'The package is being transported to the delivery address',
                     timestamp: '',
                     completed: false,
                     icon: 'fa-shipping-fast'
                 },
                 {
-                    status: 'Giao hàng thành công',
-                    description: 'Hàng hóa đã được giao thành công đến người nhận',
+                    status: 'Delivered successfully',
+                    description: 'The package has been delivered to the recipient',
                     timestamp: '',
                     completed: false,
                     icon: 'fa-check-circle'

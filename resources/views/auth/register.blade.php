@@ -5,7 +5,7 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="text-center">
             <h2 class="text-3xl font-bold text-orange-600">CourierXpress</h2>
-            <p class="mt-2 text-sm text-gray-600">Tạo tài khoản mới</p>
+            <p class="mt-2 text-sm text-gray-600">Create a new account</p>
         </div>
     </div>
 
@@ -23,11 +23,11 @@
 
                 <!-- Full Name -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Họ và tên</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full name</label>
                     <div class="mt-1">
                         <input id="name" name="name" type="text" required 
                                class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-                               placeholder="Nhập họ và tên"
+                               placeholder="Enter your full name"
                                value="{{ old('name') }}">
                     </div>
                     @error('name')
@@ -37,14 +37,14 @@
 
                 <!-- Phone Number -->
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Số điện thoại</label>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone number</label>
                     <div class="mt-1 relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <span class="text-gray-500 text-sm">+84</span>
                         </div>
                         <input id="phone" name="phone" type="tel" required 
                                class="appearance-none block w-full pl-12 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-                               placeholder="Nhập số điện thoại"
+                               placeholder="Enter your phone number"
                                value="{{ old('phone') }}">
                     </div>
                     @error('phone')
@@ -58,7 +58,7 @@
                     <div class="mt-1">
                         <input id="email" name="email" type="email" required 
                                class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-                               placeholder="Nhập email"
+                               placeholder="Enter your email"
                                value="{{ old('email') }}">
                     </div>
                     @error('email')
@@ -68,11 +68,11 @@
 
                 <!-- Password -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <div class="mt-1">
                         <input id="password" name="password" type="password" required 
                                class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-                               placeholder="Nhập mật khẩu (tối thiểu 8 ký tự)">
+                               placeholder="Enter password (at least 8 characters)">
                     </div>
                     @error('password')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -81,11 +81,11 @@
 
                 <!-- Confirm Password -->
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Xác nhận mật khẩu</label>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm password</label>
                     <div class="mt-1">
                         <input id="password_confirmation" name="password_confirmation" type="password" required 
                                class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-                               placeholder="Nhập lại mật khẩu">
+                               placeholder="Re-enter your password">
                     </div>
                     @error('password_confirmation')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -113,16 +113,16 @@
                 <div>
                     <button type="submit" 
                             class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-150 ease-in-out">
-                        Tạo tài khoản
+                        Create account
                     </button>
                 </div>
 
                 <!-- Login Link -->
                 <div class="text-center">
                     <p class="text-sm text-gray-600">
-                        Đã có tài khoản?
+                        Already have an account?
                         <a href="{{ route('login') }}" class="font-medium text-orange-600 hover:text-orange-500">
-                            Đăng nhập ngay
+                            Sign in now
                         </a>
                     </p>
                 </div>
