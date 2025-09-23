@@ -1,12 +1,12 @@
 @extends('layouts.unified')
 
-@section('title', 'Chi tiết đơn hàng - CourierXpress')
+@section('title', 'Order Details - CourierXpress')
 
 @section('navigation')
     <a href="/user/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/user/create-order" class="text-gray-700 hover:text-red-600">Tạo đơn hàng</a>
-    <a href="/user/orders" class="text-red-600 font-medium">Đơn hàng</a>
-    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Hồ sơ</a>
+    <a href="/user/create-order" class="text-gray-700 hover:text-red-600">Create Order</a>
+    <a href="/user/orders" class="text-red-600 font-medium">Orders</a>
+    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Profile</a>
 @endsection
 
 @section('head')
@@ -27,10 +27,10 @@
                         </a>
                         <div>
                             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                                Đơn hàng #{{ $order->id }}
+                                Order #{{ $order->id }}
                             </h2>
                             <p class="mt-1 text-sm text-gray-500">
-                                Tạo lúc: {{ $order->created_at->format('d/m/Y H:i') }}
+                                Created at: {{ $order->created_at->format('d/m/Y H:i') }}
                             </p>
                         </div>
                     </div>
@@ -38,12 +38,12 @@
                 <div class="mt-4 flex space-x-3 md:mt-0 md:ml-4">
                     @if($order->status === 'pending')
                         <button type="button" onclick="cancelOrder({{ $order->id }})" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
-                            Hủy đơn hàng
+                            Cancel order
                         </button>
                     @endif
                     @if($order->status === 'completed' && !$order->rating)
                         <button type="button" onclick="showRatingModal()" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700">
-                            Đánh giá
+                            Rate
                         </button>
                     @endif
                 </div>
@@ -58,7 +58,7 @@
             <div class="space-y-6">
                 <!-- Status Card -->
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Trạng thái đơn hàng</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Order status</h3>
                     <div class="flex items-center space-x-2">
                         <div class="flex-shrink-0">
                             {!! getStatusIcon($order->status) !!}
@@ -68,7 +68,7 @@
                                 {!! getStatusBadge($order->status) !!}
                             </p>
                             <p class="text-sm text-gray-500">
-                                Cập nhật lúc: {{ $order->updated_at->format('d/m/Y H:i') }}
+                                Updated at: {{ $order->updated_at->format('d/m/Y H:i') }}
                             </p>
                         </div>
                     </div>
@@ -109,10 +109,10 @@
 
                 <!-- Delivery Information -->
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Thông tin giao nhận</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Delivery information</h3>
                     <dl class="grid grid-cols-1 gap-x-4 gap-y-6">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Người gửi</dt>
+                            <dt class="text-sm font-medium text-gray-500">Sender</dt>
                             <dd class="mt-1">
                                 <p class="text-sm text-gray-900">{{ $order->pickup_name }}</p>
                                 <p class="text-sm text-gray-500">{{ $order->pickup_phone }}</p>
@@ -120,7 +120,7 @@
                             </dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Người nhận</dt>
+                            <dt class="text-sm font-medium text-gray-500">Receiver</dt>
                             <dd class="mt-1">
                                 <p class="text-sm text-gray-900">{{ $order->delivery_name }}</p>
                                 <p class="text-sm text-gray-500">{{ $order->delivery_phone }}</p>
@@ -132,33 +132,33 @@
 
                 <!-- Package Information -->
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Thông tin kiện hàng</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Package information</h3>
                     <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                         <div class="sm:col-span-1">
-                            <dt class="text-sm font-medium text-gray-500">Loại hàng</dt>
+                            <dt class="text-sm font-medium text-gray-500">Package type</dt>
                             <dd class="mt-1 text-sm text-gray-900">{{ $order->package_type_text }}</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="text-sm font-medium text-gray-500">Khối lượng</dt>
+                            <dt class="text-sm font-medium text-gray-500">Weight</dt>
                             <dd class="mt-1 text-sm text-gray-900">{{ $order->weight }} kg</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="text-sm font-medium text-gray-500">Giá trị hàng</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ number_format($order->value, 0, ',', '.') }} đ</dd>
+                            <dt class="text-sm font-medium text-gray-500">Declared value</dt>
+                            <dd class="mt-1 text-sm text-gray-900">{{ number_format($order->value, 0, ',', '.') }} ₫</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="text-sm font-medium text-gray-500">Phí vận chuyển</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ number_format($order->shipping_fee, 0, ',', '.') }} đ</dd>
+                            <dt class="text-sm font-medium text-gray-500">Shipping fee</dt>
+                            <dd class="mt-1 text-sm text-gray-900">{{ number_format($order->shipping_fee, 0, ',', '.') }} ₫</dd>
                         </div>
                         @if($order->cod_amount)
                         <div class="sm:col-span-1">
-                            <dt class="text-sm font-medium text-gray-500">Thu hộ COD</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ number_format($order->cod_amount, 0, ',', '.') }} đ</dd>
+                            <dt class="text-sm font-medium text-gray-500">COD amount</dt>
+                            <dd class="mt-1 text-sm text-gray-900">{{ number_format($order->cod_amount, 0, ',', '.') }} ₫</dd>
                         </div>
                         @endif
                         <div class="sm:col-span-2">
-                            <dt class="text-sm font-medium text-gray-500">Ghi chú</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ $order->notes ?? 'Không có' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500">Notes</dt>
+                            <dd class="mt-1 text-sm text-gray-900">{{ $order->notes ?? 'None' }}</dd>
                         </div>
                     </dl>
                 </div>
@@ -168,14 +168,14 @@
             <div class="space-y-6">
                 <!-- Delivery Map -->
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Bản đồ giao hàng</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Delivery map</h3>
                     <div id="map" class="h-96 rounded-lg"></div>
                 </div>
 
                 <!-- Shipper Information -->
                 @if($order->shipper)
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Thông tin shipper</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Shipper information</h3>
                     <div class="flex items-center">
                         <div class="flex-shrink-0 h-12 w-12">
                             <img class="h-12 w-12 rounded-full" src="{{ $order->shipper->avatar ?? '/images/default-avatar.png' }}" alt="Shipper avatar">
@@ -187,7 +187,7 @@
                     </div>
                     @if($order->status === 'completed' && $order->rating)
                     <div class="mt-4">
-                        <h4 class="text-sm font-medium text-gray-900">Đánh giá của bạn</h4>
+                        <h4 class="text-sm font-medium text-gray-900">Your rating</h4>
                         <div class="flex items-center mt-1">
                             @for($i = 1; $i <= 5; $i++)
                             <i class="fas fa-star {{ $i <= $order->rating ? 'text-yellow-400' : 'text-gray-300' }}"></i>
@@ -204,7 +204,7 @@
                 <!-- Photos -->
                 @if($order->photos && count($order->photos) > 0)
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Hình ảnh</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Photos</h3>
                     <div class="grid grid-cols-2 gap-4">
                         @foreach($order->photos as $photo)
                         <div>
@@ -229,11 +229,11 @@
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
-                        Đánh giá đơn hàng
+                        Rate this order
                     </h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Chất lượng dịch vụ</label>
+                            <label class="block text-sm font-medium text-gray-700">Service quality</label>
                             <div class="flex items-center mt-2 space-x-2">
                                 @for($i = 1; $i <= 5; $i++)
                                 <button type="button" onclick="setRating({{ $i }})" class="text-2xl focus:outline-none" data-rating="{{ $i }}">
@@ -243,17 +243,17 @@
                             </div>
                         </div>
                         <div>
-                            <label for="comment" class="block text-sm font-medium text-gray-700">Nhận xét</label>
+                            <label for="comment" class="block text-sm font-medium text-gray-700">Comment</label>
                             <textarea id="comment" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button" onclick="submitRating()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Gửi đánh giá
+                        Submit rating
                     </button>
                     <button type="button" onclick="hideRatingModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Hủy
+                        Cancel
                     </button>
                 </div>
             </div>
@@ -280,11 +280,11 @@
 
         // Add markers
         const pickupMarker = L.marker([{{ $order->pickup_lat }}, {{ $order->pickup_lng }}])
-            .bindPopup('Điểm lấy hàng')
+            .bindPopup('Pickup point')
             .addTo(map);
 
         const deliveryMarker = L.marker([{{ $order->delivery_lat }}, {{ $order->delivery_lng }}])
-            .bindPopup('Điểm giao hàng')
+            .bindPopup('Delivery point')
             .addTo(map);
 
         // Draw route if available
@@ -313,7 +313,7 @@
     }
 
     function cancelOrder(orderId) {
-        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')) {
+        if (confirm('Are you sure you want to cancel this order?')) {
             fetch(`/api/user/orders/${orderId}/cancel`, {
                 method: 'POST',
                 headers: {
@@ -326,7 +326,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Có lỗi xảy ra khi hủy đơn hàng!');
+                alert('An error occurred while cancelling the order!');
             });
         }
     }
@@ -357,7 +357,7 @@
 
     function submitRating() {
         if (currentRating === 0) {
-            alert('Vui lòng chọn số sao đánh giá!');
+            alert('Please select a star rating!');
             return;
         }
 
@@ -378,7 +378,7 @@
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra khi gửi đánh giá!');
+            alert('An error occurred while submitting your rating!');
         });
     }
 </script>

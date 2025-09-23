@@ -1,13 +1,13 @@
 @extends('layouts.unified')
 
-@section('title', 'Tra cứu đơn hàng - CourierXpress')
+@section('title', 'Order Tracking - CourierXpress')
 
 @section('navigation')
     <a href="/user/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/user/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/user/create-order" class="text-gray-700 hover:text-red-600">Tạo đơn</a>
-    <a href="/user/tracking" class="text-red-600 font-medium">Tra cứu</a>
-    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Hồ sơ</a>
+    <a href="/user/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/user/create-order" class="text-gray-700 hover:text-red-600">Create Order</a>
+    <a href="/user/tracking" class="text-red-600 font-medium">Tracking</a>
+    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Profile</a>
 @endsection
 
 @section('head')
@@ -89,8 +89,8 @@
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold mb-2">Tra cứu đơn hàng</h1>
-                    <p class="text-blue-100">Theo dõi tình trạng gói hàng của bạn một cách dễ dàng</p>
+                    <h1 class="text-2xl font-bold mb-2">Order Tracking</h1>
+                    <p class="text-blue-100">Track your shipment status easily</p>
                 </div>
                 <div class="hidden md:block">
                     <i class="fas fa-search text-4xl text-blue-200"></i>
@@ -101,26 +101,26 @@
 
     <!-- My Orders Quick Access -->
     <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Đơn hàng của tôi</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">My Orders</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="myOrders">
             <!-- My orders will be loaded here -->
             <div class="text-center text-gray-500 py-4">
                 <i class="fas fa-spinner fa-spin mb-2"></i>
-                <p>Đang tải đơn hàng...</p>
+                <p>Loading orders...</p>
             </div>
         </div>
     </div>
 
     <!-- Search Form -->
     <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Tra cứu mã vận đơn</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Track by Tracking Number</h3>
         <form id="trackingForm" class="flex gap-3">
             <div class="flex-1">
                 <input 
                     type="text" 
                     id="trackingNumber" 
                     name="tracking_number"
-                    placeholder="Nhập mã vận đơn (ví dụ: CX000001)"
+                    placeholder="Enter tracking number (e.g., CX000001)"
                     class="w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-300 focus:border-blue-500"
                     required
                 >
@@ -130,7 +130,7 @@
                 id="searchBtn"
                 class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors pulse-animation"
             >
-                <span id="searchText">Tra cứu</span>
+                <span id="searchText">Search</span>
             </button>
         </form>
     </div>
@@ -138,7 +138,7 @@
     <!-- Loading State -->
     <div id="loadingState" class="hidden bg-white rounded-lg shadow p-8 text-center">
         <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-4"></i>
-        <p class="text-gray-600">Đang tìm kiếm thông tin đơn hàng...</p>
+        <p class="text-gray-600">Searching for order information...</p>
     </div>
 
     <!-- Error State -->
@@ -146,8 +146,8 @@
         <div class="flex items-center">
             <i class="fas fa-exclamation-triangle text-red-500 text-xl mr-3"></i>
             <div>
-                <h3 class="text-red-800 font-medium">Không tìm thấy đơn hàng</h3>
-                <p class="text-red-600" id="errorMessage">Vui lòng kiểm tra lại mã vận đơn và thử lại.</p>
+                <h3 class="text-red-800 font-medium">Order not found</h3>
+                <p class="text-red-600" id="errorMessage">Please check the tracking number and try again.</p>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">
                     <i class="fas fa-user text-green-500 mr-2"></i>
-                    Thông tin gửi/nhận
+                    Sender/Receiver Information
                 </h3>
                 <div id="senderReceiverInfo">
                     <!-- Details will be inserted here -->
@@ -171,7 +171,7 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">
                     <i class="fas fa-box text-blue-500 mr-2"></i>
-                    Thông tin gói hàng
+                    Package Information
                 </h3>
                 <div id="packageInfo">
                     <!-- Package details will be inserted here -->
@@ -183,7 +183,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-6">
                 <i class="fas fa-route text-purple-500 mr-2"></i>
-                Lịch sử vận chuyển
+                Shipment Timeline
             </h3>
             <div id="timeline" class="space-y-8">
                 <!-- Timeline steps will be inserted here -->
@@ -194,7 +194,7 @@
         <div class="bg-white rounded-lg shadow p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">
                 <i class="fas fa-cogs text-orange-500 mr-2"></i>
-                Thao tác
+                Actions
             </h3>
             <div class="flex flex-wrap gap-3" id="orderActions">
                 <!-- Action buttons will be inserted here -->
@@ -214,7 +214,7 @@
             const trackingNumber = document.getElementById('trackingNumber').value.trim();
             
             if (!trackingNumber) {
-                alert('Vui lòng nhập mã vận đơn');
+                alert('Please enter a tracking number');
                 return;
             }
             
@@ -252,8 +252,8 @@
                 container.innerHTML = `
                     <div class="col-span-full text-center text-gray-500 py-8">
                         <i class="fas fa-box-open text-4xl mb-4"></i>
-                        <p>Bạn chưa có đơn hàng nào</p>
-                        <a href="/user/create-order" class="text-blue-600 hover:text-blue-800 font-medium">Tạo đơn hàng đầu tiên →</a>
+                        <p>You have no orders yet</p>
+                        <a href="/user/create-order" class="text-blue-600 hover:text-blue-800 font-medium">Create your first order →</a>
                     </div>
                 `;
             }
@@ -262,12 +262,12 @@
             console.error('Error loading my orders:', error);
             document.getElementById('myOrders').innerHTML = `
                 <div class="col-span-full text-center text-red-500 py-4">
-                    <p>Không thể tải đơn hàng</p>
+                    <p>Unable to load orders</p>
                 </div>
             `;
         });
     }
-
+    
     function createOrderCard(order) {
         const div = document.createElement('div');
         div.className = 'border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer';
@@ -287,16 +287,16 @@
         };
         
         const statusTexts = {
-            'pending': 'Chờ xử lý',
-            'confirmed': 'Đã xác nhận',
-            'assigned': 'Đã phân công',
-            'pickup': 'Đang lấy hàng',
-            'picked_up': 'Đã lấy hàng',
-            'in_transit': 'Đang vận chuyển',
-            'delivering': 'Đang giao hàng',
-            'delivered': 'Đã giao',
-            'failed': 'Thất bại',
-            'cancelled': 'Đã hủy'
+            'pending': 'Pending',
+            'confirmed': 'Confirmed',
+            'assigned': 'Assigned',
+            'pickup': 'Picking up',
+            'picked_up': 'Picked up',
+            'in_transit': 'In transit',
+            'delivering': 'Delivering',
+            'delivered': 'Delivered',
+            'failed': 'Failed',
+            'cancelled': 'Cancelled'
         };
         
         div.innerHTML = `
@@ -306,8 +306,8 @@
                     ${statusTexts[order.status] || order.status}
                 </span>
             </div>
-            <p class="text-sm text-gray-600 truncate">${order.delivery_address || 'Địa chỉ giao hàng'}</p>
-            <p class="text-xs text-gray-500 mt-1">${new Date(order.created_at).toLocaleDateString('vi-VN')}</p>
+            <p class="text-sm text-gray-600 truncate">${order.delivery_address || 'Delivery address'}</p>
+            <p class="text-xs text-gray-500 mt-1">${new Date(order.created_at).toLocaleDateString('en-US')}</p>
         `;
         
         return div;
@@ -337,13 +337,13 @@
         .catch(error => {
             hideLoading();
             console.error('Error:', error);
-            showError('Có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại.');
+            showError('An error occurred while searching. Please try again.');
         });
     }
     
     function showLoading() {
         document.getElementById('searchBtn').disabled = true;
-        document.getElementById('searchText').textContent = 'Đang tìm...';
+        document.getElementById('searchText').textContent = 'Searching...';
         document.getElementById('loadingState').classList.remove('hidden');
         document.getElementById('errorState').classList.add('hidden');
         document.getElementById('resultsSection').classList.add('hidden');
@@ -351,7 +351,7 @@
     
     function hideLoading() {
         document.getElementById('searchBtn').disabled = false;
-        document.getElementById('searchText').textContent = 'Tra cứu';
+        document.getElementById('searchText').textContent = 'Search';
         document.getElementById('loadingState').classList.add('hidden');
     }
     
@@ -366,16 +366,16 @@
         senderReceiverInfo.innerHTML = `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-green-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-green-800 mb-2">Người gửi</h4>
-                    <p class="text-sm"><strong>Tên:</strong> ${data.order.pickup_name}</p>
-                    <p class="text-sm"><strong>SĐT:</strong> ${data.order.pickup_phone}</p>
-                    <p class="text-sm"><strong>Địa chỉ:</strong> ${data.order.pickup_address}</p>
+                    <h4 class="font-semibold text-green-800 mb-2">Sender</h4>
+                    <p class="text-sm"><strong>Name:</strong> ${data.order.pickup_name}</p>
+                    <p class="text-sm"><strong>Phone:</strong> ${data.order.pickup_phone}</p>
+                    <p class="text-sm"><strong>Address:</strong> ${data.order.pickup_address}</p>
                 </div>
                 <div class="bg-blue-50 p-4 rounded-lg">
-                    <h4 class="font-semibold text-blue-800 mb-2">Người nhận</h4>
-                    <p class="text-sm"><strong>Tên:</strong> ${data.order.delivery_name}</p>
-                    <p class="text-sm"><strong>SĐT:</strong> ${data.order.delivery_phone}</p>
-                    <p class="text-sm"><strong>Địa chỉ:</strong> ${data.order.delivery_address}</p>
+                    <h4 class="font-semibold text-blue-800 mb-2">Receiver</h4>
+                    <p class="text-sm"><strong>Name:</strong> ${data.order.delivery_name}</p>
+                    <p class="text-sm"><strong>Phone:</strong> ${data.order.delivery_phone}</p>
+                    <p class="text-sm"><strong>Address:</strong> ${data.order.delivery_address}</p>
                 </div>
             </div>
         `;
@@ -385,12 +385,12 @@
         packageInfo.innerHTML = `
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <p class="text-sm"><strong>Loại:</strong> ${data.order.package_type || 'Không xác định'}</p>
-                    <p class="text-sm"><strong>Trọng lượng:</strong> ${data.order.weight || 'N/A'} kg</p>
+                    <p class="text-sm"><strong>Type:</strong> ${data.order.package_type || 'Unknown'}</p>
+                    <p class="text-sm"><strong>Weight:</strong> ${data.order.weight || 'N/A'} kg</p>
                 </div>
                 <div>
-                    <p class="text-sm"><strong>Giá trị COD:</strong> ${Number(data.order.cod_amount || 0).toLocaleString('vi-VN')} ₫</p>
-                    <p class="text-sm"><strong>Phí vận chuyển:</strong> ${Number(data.order.shipping_fee || 0).toLocaleString('vi-VN')} ₫</p>
+                    <p class="text-sm"><strong>COD Amount:</strong> ${Number(data.order.cod_amount || 0).toLocaleString('en-US')} ₫</p>
+                    <p class="text-sm"><strong>Shipping Fee:</strong> ${Number(data.order.shipping_fee || 0).toLocaleString('en-US')} ₫</p>
                 </div>
             </div>
         `;
@@ -411,7 +411,7 @@
             timelineContainer.innerHTML = `
                 <div class="text-center text-gray-500 py-8">
                     <i class="fas fa-clock text-2xl mb-2"></i>
-                    <p>Chưa có thông tin vận chuyển</p>
+                    <p>No shipment information yet</p>
                 </div>
             `;
             return;
@@ -438,7 +438,7 @@
         // Always show view details
         actions.push(`
             <a href="/user/orders" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                <i class="fas fa-list mr-2"></i>Xem tất cả đơn hàng
+                <i class="fas fa-list mr-2"></i>View all orders
             </a>
         `);
         
@@ -446,7 +446,7 @@
         if (order.status === 'pending') {
             actions.push(`
                 <button onclick="cancelOrder('${order.id}')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
-                    <i class="fas fa-times mr-2"></i>Hủy đơn hàng
+                    <i class="fas fa-times mr-2"></i>Cancel order
                 </button>
             `);
         }
@@ -455,7 +455,7 @@
         if (order.status === 'delivered') {
             actions.push(`
                 <button onclick="rateOrder('${order.id}')" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">
-                    <i class="fas fa-star mr-2"></i>Đánh giá
+                    <i class="fas fa-star mr-2"></i>Rate
                 </button>
             `);
         }
@@ -463,7 +463,7 @@
         // Contact support
         actions.push(`
             <button onclick="contactSupport('${order.tracking_number}')" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                <i class="fas fa-headset mr-2"></i>Hỗ trợ
+                <i class="fas fa-headset mr-2"></i>Support
             </button>
         `);
         
@@ -471,19 +471,19 @@
     }
     
     function cancelOrder(orderId) {
-        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')) {
+        if (confirm('Are you sure you want to cancel this order?')) {
             // Implement cancel order
-            alert('Chức năng hủy đơn hàng sẽ được thêm vào sau!');
+            alert('Cancel order feature will be added later!');
         }
     }
     
     function rateOrder(orderId) {
         // Implement rating
-        alert('Chức năng đánh giá sẽ được thêm vào sau!');
+        alert('Rating feature will be added later!');
     }
     
     function contactSupport(trackingNumber) {
-        alert(`Liên hệ hỗ trợ cho đơn hàng ${trackingNumber}. Chức năng này sẽ được phát triển sau!`);
+        alert(`Contact support for order ${trackingNumber}. This feature will be developed later!`);
     }
 </script>
 @endsection
