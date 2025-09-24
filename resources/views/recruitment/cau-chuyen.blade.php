@@ -15,7 +15,7 @@
     <!-- Story Timeline -->
     <div class="py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Hành trình phát triển</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">{{ __('messages.development_journey') }}</h2>
             
             <div class="max-w-4xl mx-auto">
                 <div class="space-y-12">
@@ -24,10 +24,9 @@
                             <span class="text-2xl font-bold text-orange-600">2018</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Khởi đầu với ước mơ</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ __('messages.dream_beginning') }}</h3>
                             <p class="text-gray-600 text-lg">
-                                CourierXpress được thành lập bởi nhóm bạn trẻ với ước mơ cách mạng hóa ngành logistics Việt Nam. 
-                                Chúng tôi bắt đầu với 5 nhân viên và 10 tài xế đầu tiên tại TP.HCM.
+                                {{ __('messages.courierxpress_founded') }}
                             </p>
                         </div>
                     </div>
@@ -37,10 +36,9 @@
                             <span class="text-2xl font-bold text-orange-600">2019</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Mở rộng ra Hà Nội</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ __('messages.expansion_hanoi') }}</h3>
                             <p class="text-gray-600 text-lg">
-                                Sau 1 năm hoạt động, chúng tôi mở rộng dịch vụ ra Hà Nội và các tỉnh lân cận. 
-                                Đội ngũ tăng lên 100 nhân viên và 1,000 tài xế đối tác.
+                                {{ __('messages.after_1_year') }}
                             </p>
                         </div>
                     </div>
@@ -50,10 +48,9 @@
                             <span class="text-2xl font-bold text-orange-600">2020</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Vượt qua thử thách Covid-19</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ __('messages.overcoming_covid') }}</h3>
                             <p class="text-gray-600 text-lg">
-                                Trong đại dịch, chúng tôi nhanh chóng thích ứng và trở thành cầu nối quan trọng, 
-                                giúp duy trì hoạt động thương mại. Doanh thu tăng 300% so với năm trước.
+                                {{ __('messages.during_pandemic') }}
                             </p>
                         </div>
                     </div>
@@ -63,10 +60,9 @@
                             <span class="text-2xl font-bold text-orange-600">2021</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Công nghệ AI và Big Data</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ __('messages.ai_big_data') }}</h3>
                             <p class="text-gray-600 text-lg">
-                                Ra mắt hệ thống AI tối ưu tuyến đường và dự đoán nhu cầu. 
-                                Áp dụng Big Data để nâng cao trải nghiệm khách hàng.
+                                {{ __('messages.launched_ai_system') }}
                             </p>
                         </div>
                     </div>
@@ -76,10 +72,9 @@
                             <span class="text-2xl font-bold text-orange-600">2022</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Mở rộng toàn quốc</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ __('messages.nationwide_expansion') }}</h3>
                             <p class="text-gray-600 text-lg">
-                                Có mặt tại 63 tỉnh thành với mạng lưới 15,000 tài xế. 
-                                Trở thành nền tảng logistics số 1 về số lượng đơn hàng tại Việt Nam.
+                                {{ __('messages.present_63_provinces') }}
                             </p>
                         </div>
                     </div>
@@ -89,10 +84,9 @@
                             <span class="text-2xl font-bold text-orange-600">2024</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Hướng tới tương lai</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ __('messages.towards_future') }}</h3>
                             <p class="text-gray-600 text-lg">
-                                Tiếp tục đầu tư vào công nghệ blockchain, IoT và xe tự lái. 
-                                Mục tiêu mở rộng ra khu vực Đông Nam Á trong 2 năm tới.
+                                {{ __('messages.continue_investing') }}
                             </p>
                         </div>
                     </div>
@@ -104,28 +98,28 @@
     <!-- Team -->
     <div class="bg-white py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Đội ngũ lãnh đạo</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">{{ __('messages.leadership_team') }}</h2>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="text-center">
                     <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-6"></div>
                     <h3 class="text-xl font-bold mb-2 text-gray-800">Nguyễn Văn Hợp</h3>
-                    <p class="text-orange-600 font-semibold mb-4">CEO & Founder</p>
-                    <p class="text-gray-600">15 năm kinh nghiệm trong ngành logistics và công nghệ</p>
+                    <p class="text-orange-600 font-semibold mb-4">{{ __('messages.ceo_founder') }}</p>
+                    <p class="text-gray-600">{{ __('messages.logistics_experience') }}</p>
                 </div>
 
                 <div class="text-center">
                     <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-6"></div>
                     <h3 class="text-xl font-bold mb-2 text-gray-800">Châu Quốc Lâm Phong</h3>
-                    <p class="text-orange-600 font-semibold mb-4">CTO</p>
-                    <p class="text-gray-600">Chuyên gia công nghệ với 12 năm kinh nghiệm tại Silicon Valley</p>
+                    <p class="text-orange-600 font-semibold mb-4">{{ __('messages.cto') }}</p>
+                    <p class="text-gray-600">{{ __('messages.technology_expert') }}</p>
                 </div>
 
                 <div class="text-center">
                     <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-6"></div>
                     <h3 class="text-xl font-bold mb-2 text-gray-800">Hoàng Phúc</h3>
-                    <p class="text-orange-600 font-semibold mb-4">COO</p>
-                    <p class="text-gray-600">Chuyên gia vận hành với kinh nghiệm quản lý quy mô lớn</p>
+                    <p class="text-orange-600 font-semibold mb-4">{{ __('messages.coo') }}</p>
+                    <p class="text-gray-600">{{ __('messages.operations_expert') }}</p>
                 </div>
             </div>
         </div>
@@ -134,10 +128,10 @@
     <!-- CTA -->
     <div class="bg-orange-600 text-white py-20">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Viết tiếp câu chuyện cùng chúng tôi</h2>
-            <p class="text-xl mb-8">Gia nhập CourierXpress và cùng tạo nên những thành tựu mới</p>
+            <h2 class="text-4xl font-bold mb-6">{{ __('messages.write_story_together') }}</h2>
+            <p class="text-xl mb-8">{{ __('messages.join_courierxpress') }}</p>
             <button class="bg-white text-orange-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300">
-                Khám phá cơ hội
+                {{ __('messages.explore_opportunities') }}
             </button>
         </div>
     </div>
