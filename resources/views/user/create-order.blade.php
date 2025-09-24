@@ -10,10 +10,10 @@
 
 @section('navigation')
     <a href="/user/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/user/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/user/create-order" class="text-red-600 font-medium">Tạo đơn</a>
-    <a href="/user/tracking" class="text-gray-700 hover:text-red-600">Tra cứu</a>
-    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Hồ sơ</a>
+    <a href="/user/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/user/create-order" class="text-red-600 font-medium">Create order</a>
+    <a href="/user/tracking" class="text-gray-700 hover:text-red-600">Track</a>
+    <a href="/user/profile" class="text-gray-700 hover:text-red-600">Profile</a>
 @endsection
 
 @section('content')

@@ -3,27 +3,27 @@
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<!-- Hero Banner Section - Chỉ ảnh thuần túy -->
+<!-- Hero Banner Section - Pure image -->
 <div class="relative h-screen overflow-hidden">
-    <!-- Ảnh banner toàn màn hình -->
+    <!-- Fullscreen banner image -->
     <img src="{{ asset('images/1.jpg') }}" 
-         alt="CourierXpress - Dịch vụ giao hàng chuyên nghiệp" 
+         alt="CourierXpress - Professional delivery service" 
          class="w-full h-full object-cover">
 </div>
 
-<!-- Tracking Section - Căn giữa -->
+<!-- Tracking Section - Centered -->
 <div class="py-20 bg-gray-50">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-sans text-gray-800 mb-4">Theo Dõi Đơn Hàng</h2>
-<p class="text-xl font-sans text-gray-600 mb-12">Nhập mã vận đơn để theo dõi tình trạng giao hàng real-time</p>
+            <h2 class="text-4xl font-sans text-gray-800 mb-4">Track Your Shipment</h2>
+<p class="text-xl font-sans text-gray-600 mb-12">Enter your tracking code to view real-time delivery status</p>
 
             
             <!-- Enhanced tracking form -->
             <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
                 <form id="trackingForm" class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
                     @csrf
-                    <input type="text" id="tracking_id" name="tracking_id" placeholder="Nhập mã theo dõi (VD: CX123456789)..."
+                    <input type="text" id="tracking_id" name="tracking_id" placeholder="Enter tracking code (e.g., CX123456789)..."
                            class="flex-1 px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-lg transition-all duration-300">
                     <button type="submit"
                             class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
@@ -31,7 +31,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
-                            <span>TÌM KIẾM</span>
+                            <span>SEARCH</span>
                         </span>
                     </button>
                 </form>
@@ -41,20 +41,20 @@
                     <!-- Success Result -->
                     <div id="trackingSuccess" class="bg-green-50 border border-green-200 rounded-xl p-6 hidden relative">
                         <button onclick="closeTrackingResult()" class="absolute top-4 right-4 text-green-600 hover:text-green-800 text-xl font-bold">&times;</button>
-                        <h4 class="text-green-800 font-bold mb-3 text-lg">✅ Tìm thấy đơn hàng!</h4>
+                        <h4 class="text-green-800 font-bold mb-3 text-lg">✅ Order found!</h4>
                         <div id="orderDetails" class="text-green-700"></div>
                     </div>
                     
                     <!-- Error Result -->
                     <div id="trackingError" class="bg-red-50 border border-red-200 rounded-xl p-6 hidden">
-                        <h4 class="text-red-800 font-bold mb-3 text-lg">❌ Không tìm thấy đơn hàng</h4>
-                        <p class="text-red-700">Mã vận đơn không tồn tại trong hệ thống. Vui lòng kiểm tra lại mã theo dõi.</p>
+                        <h4 class="text-red-800 font-bold mb-3 text-lg">❌ Order not found</h4>
+                        <p class="text-red-700">The tracking code does not exist in our system. Please check your code and try again.</p>
                     </div>
                     
                     <!-- Loading -->
                     <div id="trackingLoading" class="bg-blue-50 border border-blue-200 rounded-xl p-6 hidden">
-                        <h4 class="text-blue-800 font-bold mb-3 text-lg">🔍 Đang tìm kiếm...</h4>
-                        <p class="text-blue-700">Vui lòng đợi trong giây lát...</p>
+                        <h4 class="text-blue-800 font-bold mb-3 text-lg">🔍 Searching...</h4>
+                        <p class="text-blue-700">Please wait a moment...</p>
                     </div>
                 </div>
             </div>
@@ -166,23 +166,23 @@
         <!-- Modal Tabs -->
         <div class="flex justify-center mb-6">
             <button id="loginTab" class="px-6 py-2 text-white text-red-600 font-medium border-b-2 border-orange-500" onclick="switchTab('login')">
-                Đăng nhập
+                Sign in
             </button>
             <button id="registerTab" class="px-6 py-2 text-gray-400 text-red-600 font-medium" onclick="switchTab('register')">
-                Đăng ký
+                Register
             </button>
         </div>
         
         <!-- Login Form -->
         <div id="loginForm">
             <div class="text-center mb-6">
-                <h2 class="text-3xl text-red-600 font-medium text-white mb-2">Đăng nhập</h2>
-                <p class="text-cyan-200 text-red-600 font-medium">Đăng nhập vào tài khoản của bạn</p>
+                <h2 class="text-3xl text-red-600 font-medium text-white mb-2">Sign in</h2>
+                <p class="text-cyan-200 text-red-600 font-medium">Sign in to your account</p>
             </div>
             
             <!-- Test Account Info -->
             <div class="bg-blue-900 bg-opacity-50 border border-blue-400 rounded-lg p-3 mb-4">
-                <h3 class="text-xs font-medium text-blue-200 mb-1">📋 Tài khoản test:</h3>
+                <h3 class="text-xs font-medium text-blue-200 mb-1">📋 Test accounts:</h3>
                 <div class="text-xs text-blue-100 space-y-1">
                     <p><strong>Admin:</strong> admin@courierxpress.com | 123456</p>
                     <p><strong>Customer:</strong> customer@courierxpress.com | 123456</p>
@@ -209,7 +209,7 @@
                 <div>
                     <input id="login_password" name="password" type="password" required 
                            class="w-full px-4 py-3 bg-gray-800 bg-opacity-80 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                           placeholder="Mật khẩu">
+                           placeholder="Password">
                     @error('password')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
@@ -234,7 +234,7 @@
                 
                 <button type="submit" 
                         class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 rounded-lg text-red-600 font-medium hover:from-orange-400 hover:to-red-400 transition-all duration-300">
-                    Đăng nhập
+                    Sign in
                 </button>
             </form>
         </div>
@@ -242,8 +242,8 @@
         <!-- Register Form -->
         <div id="registerForm" class="hidden">
             <div class="text-center mb-6">
-                <h2 class="text-3xl text-red-600 font-medium text-white mb-2">Đăng ký</h2>
-                <p class="text-cyan-200 text-red-600 font-medium">Tạo tài khoản mới</p>
+                <h2 class="text-3xl text-red-600 font-medium text-white mb-2">Register</h2>
+                <p class="text-cyan-200 text-red-600 font-medium">Create a new account</p>
             </div>
             
             <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
@@ -253,7 +253,7 @@
                 <div>
                     <input id="register_name" name="name" type="text" required 
                            class="w-full px-4 py-3 bg-gray-800 bg-opacity-80 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                           placeholder="Họ và tên"
+                           placeholder="Full name"
                            value="{{ old('name') }}">
                     @error('name')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -264,7 +264,7 @@
                 <div>
                     <input id="register_phone" name="phone" type="tel" required 
                            class="w-full px-4 py-3 bg-gray-800 bg-opacity-80 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                           placeholder="Số điện thoại"
+                           placeholder="Phone number"
                            value="{{ old('phone') }}">
                     @error('phone')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -286,7 +286,7 @@
                 <div>
                     <input id="register_password" name="password" type="password" required 
                            class="w-full px-4 py-3 bg-gray-800 bg-opacity-80 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                           placeholder="Mật khẩu (tối thiểu 8 ký tự)">
+                           placeholder="Password (minimum 8 characters)">
                     @error('password')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
@@ -296,7 +296,7 @@
                 <div>
                     <input id="register_password_confirmation" name="password_confirmation" type="password" required 
                            class="w-full px-4 py-3 bg-gray-800 bg-opacity-80 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                           placeholder="Xác nhận mật khẩu">
+                           placeholder="Confirm password">
                     @error('password_confirmation')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
@@ -321,7 +321,7 @@
                 
                 <button type="submit" 
                         class="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-lg text-red-600 font-medium hover:from-green-400 hover:to-blue-400 transition-all duration-300 neon-glow cyber-glow">
-                    Đăng ký
+                    Register
                 </button>
             </form>
         </div>
@@ -376,7 +376,7 @@ function validateForm(formType) {
         const password = document.getElementById('login_password').value;
         
         if (!email || !password) {
-            alert('Vui lòng nhập đầy đủ thông tin');
+            alert('Please fill in all required fields');
             return false;
         }
     } else if (formType === 'register') {
@@ -387,17 +387,17 @@ function validateForm(formType) {
         const confirmPassword = document.getElementById('register_password_confirmation').value;
         
         if (!name || !email || !phone || !password || !confirmPassword) {
-            alert('Vui lòng nhập đầy đủ thông tin');
+            alert('Please fill in all required fields');
             return false;
         }
         
         if (password !== confirmPassword) {
-            alert('Mật khẩu xác nhận không khớp');
+            alert('Password confirmation does not match');
             return false;
         }
         
         if (password.length < 8) {
-            alert('Mật khẩu phải có ít nhất 8 ký tự');
+            alert('Password must be at least 8 characters long');
             return false;
         }
     }
@@ -411,7 +411,7 @@ document.getElementById('trackingForm').addEventListener('submit', function(e) {
     const trackingId = document.getElementById('tracking_id').value.trim();
     
     if (!trackingId) {
-        alert('Vui lòng nhập mã theo dõi');
+        alert('Please enter a tracking code');
         return;
     }
     
@@ -466,11 +466,11 @@ function showTrackingResult(type, orderData = null) {
             successDiv.classList.remove('hidden');
             if (orderData) {
                 document.getElementById('orderDetails').innerHTML = `
-                    <p><strong>Mã vận đơn:</strong> <span class="text-sm font-medium text-blue-600">${orderData.tracking_number}</span></p>
-                    <p><strong>Trạng thái:</strong> ${getStatusInVietnamese(orderData.status)}</p>
-                    <p><strong>Từ:</strong> ${orderData.pickup_address}, ${orderData.pickup_city}</p>
-                    <p><strong>Đến:</strong> ${orderData.delivery_address}, ${orderData.delivery_city}</p>
-                    <p><strong>Ngày tạo:</strong> ${formatDate(orderData.created_at)}</p>
+                    <p><strong>Tracking number:</strong> <span class="text-sm font-medium text-blue-600">${orderData.tracking_number}</span></p>
+                    <p><strong>Status:</strong> ${getStatusInEnglish(orderData.status)}</p>
+                    <p><strong>From:</strong> ${orderData.pickup_address}, ${orderData.pickup_city}</p>
+                    <p><strong>To:</strong> ${orderData.delivery_address}, ${orderData.delivery_city}</p>
+                    <p><strong>Created at:</strong> ${formatDate(orderData.created_at)}</p>
                 `;
             }
             break;
@@ -480,17 +480,17 @@ function showTrackingResult(type, orderData = null) {
     }
 }
 
-// Helper function to translate status to Vietnamese
-function getStatusInVietnamese(status) {
+// Helper function to translate status to English
+function getStatusInEnglish(status) {
     const statusMap = {
-        'pending': 'Đang chờ xử lý',
-        'confirmed': 'Đã xác nhận',
-        'picked_up': 'Đã lấy hàng',
-        'in_transit': 'Đang vận chuyển',
-        'out_for_delivery': 'Đang giao hàng',
-        'delivered': 'Đã giao hàng',
-        'cancelled': 'Đã hủy',
-        'returned': 'Đã hoàn trả'
+        'pending': 'Pending',
+        'confirmed': 'Confirmed',
+        'picked_up': 'Picked up',
+        'in_transit': 'In transit',
+        'out_for_delivery': 'Out for delivery',
+        'delivered': 'Delivered',
+        'cancelled': 'Cancelled',
+        'returned': 'Returned'
     };
     return statusMap[status] || status;
 }
@@ -498,7 +498,7 @@ function getStatusInVietnamese(status) {
 // Helper function to format date
 function formatDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleDateString('vi-VN') + ' ' + date.toLocaleTimeString('vi-VN');
+    return date.toLocaleDateString('en-US') + ' ' + date.toLocaleTimeString('en-US');
 }
 
 // Function to close tracking result

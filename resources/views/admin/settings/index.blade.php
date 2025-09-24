@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,9 +39,9 @@
                 </div>
                 <nav class="hidden md:flex items-center space-x-6">
                     <a href="/admin/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-                    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-                    <a href="/admin/users" class="text-gray-700 hover:text-red-600">Người dùng</a>
-                    <a href="/admin/settings" class="text-red-600 font-medium">Cài đặt</a>
+                    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+                    <a href="/admin/users" class="text-gray-700 hover:text-red-600">Users</a>
+                    <a href="/admin/settings" class="text-red-600 font-medium">Settings</a>
                 </nav>
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-2">
@@ -51,7 +51,7 @@
                         <span class="text-gray-700 font-medium">{{ auth()->user()->name }}</span>
                     </div>
                     <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
                     </button>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                 <li>
                     <div class="flex items-center">
                         <i class="fas fa-chevron-right text-gray-400 mx-3"></i>
-                        <span class="text-gray-500">Cài đặt hệ thống</span>
+                        <span class="text-gray-500">System settings</span>
                     </div>
                 </li>
             </ol>
@@ -80,8 +80,8 @@
         <!-- Page Header -->
         <div class="mb-8">
             <div class="bg-gradient-to-r from-purple-600 to-blue-700 rounded-lg shadow-lg p-6 text-white">
-                <h1 class="text-3xl font-bold mb-2">Cài đặt hệ thống</h1>
-                <p class="text-purple-100">Quản lý và cấu hình các thiết lập của hệ thống CourierXpress</p>
+                <h1 class="text-3xl font-bold mb-2">System settings</h1>
+                <p class="text-purple-100">Manage and configure CourierXpress system settings</p>
             </div>
         </div>
 
@@ -90,35 +90,35 @@
             <!-- Settings Navigation -->
             <div class="lg:w-1/4">
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Danh mục cài đặt</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Settings categories</h3>
                     <nav class="space-y-2">
                         <button onclick="switchCategory('general')" class="setting-tab w-full text-left px-4 py-3 rounded-lg bg-blue-600 text-white font-medium">
-                            <i class="fas fa-cog mr-3"></i>Tổng quát
+                            <i class="fas fa-cog mr-3"></i>General
                         </button>
                         <button onclick="switchCategory('business')" class="setting-tab w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">
-                            <i class="fas fa-building mr-3"></i>Thông tin doanh nghiệp
+                            <i class="fas fa-building mr-3"></i>Business information
                         </button>
                         <button onclick="switchCategory('shipping')" class="setting-tab w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">
-                            <i class="fas fa-truck mr-3"></i>Vận chuyển
+                            <i class="fas fa-truck mr-3"></i>Shipping
                         </button>
                         <button onclick="switchCategory('notification')" class="setting-tab w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">
-                            <i class="fas fa-bell mr-3"></i>Thông báo
+                            <i class="fas fa-bell mr-3"></i>Notifications
                         </button>
                         <button onclick="switchCategory('security')" class="setting-tab w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">
-                            <i class="fas fa-shield-alt mr-3"></i>Bảo mật
+                            <i class="fas fa-shield-alt mr-3"></i>Security
                         </button>
                     </nav>
                     
                     <!-- Action Buttons -->
                     <div class="mt-6 space-y-2">
                         <button onclick="exportSettings()" class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                            <i class="fas fa-download mr-2"></i>Xuất cài đặt
+                            <i class="fas fa-download mr-2"></i>Export settings
                         </button>
                         <button onclick="showImportModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                            <i class="fas fa-upload mr-2"></i>Nhập cài đặt
+                            <i class="fas fa-upload mr-2"></i>Import settings
                         </button>
                         <button onclick="resetSettings()" class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                            <i class="fas fa-undo mr-2"></i>Đặt lại mặc định
+                            <i class="fas fa-undo mr-2"></i>Reset to defaults
                         </button>
                     </div>
                 </div>
@@ -129,13 +129,13 @@
                 <div class="bg-white rounded-lg shadow-lg">
                     <!-- Settings Header -->
                     <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-gray-900" id="settingsTitle">Cài đặt tổng quát</h3>
+                        <h3 class="text-lg font-semibold text-gray-900" id="settingsTitle">General settings</h3>
                         <div class="flex space-x-2">
                             <button onclick="saveSettings()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                                <i class="fas fa-save mr-2"></i>Lưu thay đổi
+                                <i class="fas fa-save mr-2"></i>Save changes
                             </button>
                             <button onclick="loadSettings()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                                <i class="fas fa-refresh mr-2"></i>Tải lại
+                                <i class="fas fa-refresh mr-2"></i>Reload
                             </button>
                         </div>
                     </div>
@@ -161,18 +161,18 @@
             </div>
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Nhập cài đặt</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Import settings</h3>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Chọn file cài đặt (JSON)</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select settings file (JSON)</label>
                         <input type="file" id="settingsFile" accept=".json" class="w-full px-3 py-2 border border-gray-300 rounded-md">
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button onclick="importSettings()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
-                        Nhập
+                        Import
                     </button>
                     <button onclick="hideImportModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
-                        Hủy
+                        Cancel
                     </button>
                 </div>
             </div>
@@ -185,58 +185,58 @@
 
         const settingTemplates = {
             general: {
-                title: 'Cài đặt tổng quát',
+                title: 'General settings',
                 fields: [
-                    { key: 'app_name', label: 'Tên ứng dụng', type: 'text' },
-                    { key: 'app_url', label: 'URL ứng dụng', type: 'url' },
-                    { key: 'timezone', label: 'Múi giờ', type: 'select', options: ['UTC', 'Asia/Ho_Chi_Minh', 'Asia/Bangkok'] },
-                    { key: 'locale', label: 'Ngôn ngữ mặc định', type: 'select', options: ['en', 'vi', 'hi'] },
-                    { key: 'debug_mode', label: 'Chế độ debug', type: 'checkbox' }
+                    { key: 'app_name', label: 'Application name', type: 'text' },
+                    { key: 'app_url', label: 'Application URL', type: 'url' },
+                    { key: 'timezone', label: 'Timezone', type: 'select', options: ['UTC', 'Asia/Ho_Chi_Minh', 'Asia/Bangkok'] },
+                    { key: 'locale', label: 'Default language', type: 'select', options: ['en', 'vi', 'hi'] },
+                    { key: 'debug_mode', label: 'Debug mode', type: 'checkbox' }
                 ]
             },
             business: {
-                title: 'Thông tin doanh nghiệp',
+                title: 'Business information',
                 fields: [
-                    { key: 'company_name', label: 'Tên công ty', type: 'text' },
-                    { key: 'company_address', label: 'Địa chỉ', type: 'textarea' },
-                    { key: 'company_phone', label: 'Số điện thoại', type: 'tel' },
+                    { key: 'company_name', label: 'Company name', type: 'text' },
+                    { key: 'company_address', label: 'Company address', type: 'textarea' },
+                    { key: 'company_phone', label: 'Phone number', type: 'tel' },
                     { key: 'company_email', label: 'Email', type: 'email' },
-                    { key: 'business_hours', label: 'Giờ làm việc', type: 'text' },
-                    { key: 'working_days', label: 'Ngày làm việc', type: 'text' }
+                    { key: 'business_hours', label: 'Business hours', type: 'text' },
+                    { key: 'working_days', label: 'Working days', type: 'text' }
                 ]
             },
             shipping: {
-                title: 'Cài đặt vận chuyển',
+                title: 'Shipping settings',
                 fields: [
-                    { key: 'default_shipping_fee', label: 'Phí vận chuyển mặc định (VND)', type: 'number' },
-                    { key: 'free_shipping_threshold', label: 'Ngưỡng miễn phí vận chuyển (VND)', type: 'number' },
-                    { key: 'insurance_rate', label: 'Tỷ lệ bảo hiểm (%)', type: 'number', step: '0.01' },
-                    { key: 'cod_fee_rate', label: 'Phí COD (%)', type: 'number', step: '0.01' },
-                    { key: 'max_package_weight', label: 'Trọng lượng tối đa (kg)', type: 'number' },
-                    { key: 'delivery_time_standard', label: 'Thời gian giao hàng tiêu chuẩn (giờ)', type: 'number' },
-                    { key: 'delivery_time_express', label: 'Thời gian giao hàng nhanh (giờ)', type: 'number' }
+                    { key: 'default_shipping_fee', label: 'Default shipping fee (VND)', type: 'number' },
+                    { key: 'free_shipping_threshold', label: 'Free shipping threshold (VND)', type: 'number' },
+                    { key: 'insurance_rate', label: 'Insurance rate (%)', type: 'number', step: '0.01' },
+                    { key: 'cod_fee_rate', label: 'COD fee (%)', type: 'number', step: '0.01' },
+                    { key: 'max_package_weight', label: 'Max package weight (kg)', type: 'number' },
+                    { key: 'delivery_time_standard', label: 'Standard delivery time (hours)', type: 'number' },
+                    { key: 'delivery_time_express', label: 'Express delivery time (hours)', type: 'number' }
                 ]
             },
             notification: {
-                title: 'Cài đặt thông báo',
+                title: 'Notification settings',
                 fields: [
-                    { key: 'email_notifications', label: 'Thông báo email', type: 'checkbox' },
-                    { key: 'sms_notifications', label: 'Thông báo SMS', type: 'checkbox' },
-                    { key: 'push_notifications', label: 'Thông báo đẩy', type: 'checkbox' },
-                    { key: 'order_status_updates', label: 'Cập nhật trạng thái đơn hàng', type: 'checkbox' },
-                    { key: 'payment_confirmations', label: 'Xác nhận thanh toán', type: 'checkbox' },
-                    { key: 'system_alerts', label: 'Cảnh báo hệ thống', type: 'checkbox' }
+                    { key: 'email_notifications', label: 'Email notifications', type: 'checkbox' },
+                    { key: 'sms_notifications', label: 'SMS notifications', type: 'checkbox' },
+                    { key: 'push_notifications', label: 'Push notifications', type: 'checkbox' },
+                    { key: 'order_status_updates', label: 'Order status updates', type: 'checkbox' },
+                    { key: 'payment_confirmations', label: 'Payment confirmations', type: 'checkbox' },
+                    { key: 'system_alerts', label: 'System alerts', type: 'checkbox' }
                 ]
             },
             security: {
-                title: 'Cài đặt bảo mật',
+                title: 'Security settings',
                 fields: [
-                    { key: 'session_timeout', label: 'Thời gian hết hạn phiên (phút)', type: 'number' },
-                    { key: 'password_expiry_days', label: 'Thời hạn mật khẩu (ngày)', type: 'number' },
-                    { key: 'max_login_attempts', label: 'Số lần đăng nhập tối đa', type: 'number' },
-                    { key: 'lockout_duration', label: 'Thời gian khóa (phút)', type: 'number' },
-                    { key: 'two_factor_auth', label: 'Xác thực 2 bước', type: 'checkbox' },
-                    { key: 'ip_whitelist_enabled', label: 'Danh sách IP được phép', type: 'checkbox' }
+                    { key: 'session_timeout', label: 'Session timeout (minutes)', type: 'number' },
+                    { key: 'password_expiry_days', label: 'Password expiry (days)', type: 'number' },
+                    { key: 'max_login_attempts', label: 'Max login attempts', type: 'number' },
+                    { key: 'lockout_duration', label: 'Lockout duration (minutes)', type: 'number' },
+                    { key: 'two_factor_auth', label: 'Two-factor authentication', type: 'checkbox' },
+                    { key: 'ip_whitelist_enabled', label: 'Allowed IP whitelist', type: 'checkbox' }
                 ]
             }
         };
@@ -267,7 +267,7 @@
                 renderSettingsForm();
             } catch (error) {
                 console.error('Error loading settings:', error);
-                showNotification('Lỗi khi tải cài đặt', 'error');
+                showNotification('Error loading settings', 'error');
             }
         }
 
@@ -295,7 +295,7 @@
                 } else if (field.type === 'checkbox') {
                     html += `<div class="flex items-center">`;
                     html += `<input type="checkbox" name="${field.key}" ${value ? 'checked' : ''} class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">`;
-                    html += `<span class="ml-2 text-sm text-gray-600">Bật</span>`;
+                    html += `<span class="ml-2 text-sm text-gray-600">Enabled</span>`;
                     html += `</div>`;
                 } else {
                     const step = field.step ? `step="${field.step}"` : '';
@@ -349,20 +349,20 @@
                 });
                 
                 if (response.ok) {
-                    showNotification('Cài đặt đã được lưu thành công', 'success');
+                    showNotification('Settings saved successfully', 'success');
                     loadSettings(); // Reload to show updated values
                 } else {
                     const error = await response.json();
-                    showNotification('Lỗi khi lưu cài đặt: ' + (error.message || 'Unknown error'), 'error');
+                    showNotification('Error saving settings: ' + (error.message || 'Unknown error'), 'error');
                 }
             } catch (error) {
                 console.error('Error saving settings:', error);
-                showNotification('Lỗi khi lưu cài đặt', 'error');
+                showNotification('Error saving settings', 'error');
             }
         }
 
         async function resetSettings() {
-            if (!confirm('Bạn có chắc muốn đặt lại tất cả cài đặt về mặc định không?')) {
+            if (!confirm('Are you sure you want to reset all settings to defaults?')) {
                 return;
             }
             
@@ -375,14 +375,14 @@
                 });
                 
                 if (response.ok) {
-                    showNotification('Cài đặt đã được đặt lại về mặc định', 'success');
+                    showNotification('Settings have been reset to defaults', 'success');
                     loadSettings();
                 } else {
-                    showNotification('Lỗi khi đặt lại cài đặt', 'error');
+                    showNotification('Error resetting settings', 'error');
                 }
             } catch (error) {
                 console.error('Error resetting settings:', error);
-                showNotification('Lỗi khi đặt lại cài đặt', 'error');
+                showNotification('Error resetting settings', 'error');
             }
         }
 
@@ -398,10 +398,10 @@
                 a.click();
                 window.URL.revokeObjectURL(url);
                 document.body.removeChild(a);
-                showNotification('Cài đặt đã được xuất thành công', 'success');
+                showNotification('Settings exported successfully', 'success');
             } catch (error) {
                 console.error('Error exporting settings:', error);
-                showNotification('Lỗi khi xuất cài đặt', 'error');
+                showNotification('Error exporting settings', 'error');
             }
         }
 
@@ -417,7 +417,7 @@
         async function importSettings() {
             const fileInput = document.getElementById('settingsFile');
             if (!fileInput.files[0]) {
-                showNotification('Vui lòng chọn file để nhập', 'error');
+                showNotification('Please select a file to import', 'error');
                 return;
             }
             
@@ -434,16 +434,16 @@
                 });
                 
                 if (response.ok) {
-                    showNotification('Cài đặt đã được nhập thành công', 'success');
+                    showNotification('Settings imported successfully', 'success');
                     hideImportModal();
                     loadSettings();
                 } else {
                     const error = await response.json();
-                    showNotification('Lỗi khi nhập cài đặt: ' + (error.error || 'Unknown error'), 'error');
+                    showNotification('Error importing settings: ' + (error.error || 'Unknown error'), 'error');
                 }
             } catch (error) {
                 console.error('Error importing settings:', error);
-                showNotification('Lỗi khi nhập cài đặt', 'error');
+                showNotification('Error importing settings', 'error');
             }
         }
 
@@ -467,7 +467,7 @@
         }
 
         function logout() {
-            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+            if (confirm('Are you sure you want to logout?')) {
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = '/logout';

@@ -1,6 +1,6 @@
 @extends('layouts.unified')
 
-@section('title', 'Admin - Quản lý Shippers | CourierXpress')
+@section('title', 'Admin - Shippers Management | CourierXpress')
 
 @section('head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.tailwindcss.min.css">
@@ -11,11 +11,11 @@
 
 @section('navigation')
     <a href="/admin/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/admin/users" class="text-gray-700 hover:text-red-600">Người dùng</a>
-    <a href="/admin/agents" class="text-gray-700 hover:text-red-600">Chi nhánh</a>
+    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/admin/users" class="text-gray-700 hover:text-red-600">Users</a>
+    <a href="/admin/agents" class="text-gray-700 hover:text-red-600">Agents</a>
     <a href="/admin/shippers" class="text-red-600 font-medium">Shipper</a>
-    <a href="/admin/reports" class="text-gray-700 hover:text-red-600">Báo cáo</a>
+    <a href="/admin/reports" class="text-gray-700 hover:text-red-600">Reports</a>
 @endsection
 
 @section('content')
@@ -23,15 +23,15 @@
     <div class="mb-6">
         <div class="flex justify-between items-center">
             <div>
-                <h2 class="text-3xl font-bold text-gray-900">Quản lý Shippers</h2>
-                <p class="mt-2 text-gray-600">Quản lý danh sách shippers và phân công giao hàng</p>
+                <h2 class="text-3xl font-bold text-gray-900">Shippers Management</h2>
+                <p class="mt-2 text-gray-600">Manage shippers list and delivery assignments</p>
             </div>
             <div class="flex space-x-3">
                 <button onclick="openAddShipperModal()" class="bg-primary hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
-                    <i class="fas fa-plus mr-2"></i> Thêm Shipper
+                    <i class="fas fa-plus mr-2"></i> Add Shipper
                 </button>
                 <button onclick="exportShippers()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
-                    <i class="fas fa-download mr-2"></i> Xuất Excel
+                    <i class="fas fa-download mr-2"></i> Export Excel
                 </button>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     <i class="fas fa-motorcycle text-blue-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Tổng Shippers</p>
+                    <p class="text-gray-600 text-sm">Total shippers</p>
                     <p id="totalShippers" class="text-2xl font-bold text-blue-600">-</p>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <i class="fas fa-check-circle text-green-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Đang hoạt động</p>
+                    <p class="text-gray-600 text-sm">Active</p>
                     <p id="activeShippers" class="text-2xl font-bold text-green-600">-</p>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     <i class="fas fa-truck text-yellow-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Đang giao hàng</p>
+                    <p class="text-gray-600 text-sm">Delivering</p>
                     <p id="busyShippers" class="text-2xl font-bold text-yellow-600">-</p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     <i class="fas fa-pause-circle text-red-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Ngừng hoạt động</p>
+                    <p class="text-gray-600 text-sm">Inactive</p>
                     <p id="inactiveShippers" class="text-2xl font-bold text-red-600">-</p>
                 </div>
             </div>
@@ -92,12 +92,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Thông tin Shipper</th>
-                        <th>Khu vực</th>
-                        <th>Đánh giá</th>
-                        <th>Trạng thái</th>
-                        <th>Đơn giao</th>
-                        <th>Thao tác</th>
+                        <th>Shipper info</th>
+                        <th>Area</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Deliveries</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,7 +112,7 @@
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Thêm Shipper mới</h3>
+                    <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Add new shipper</h3>
                     <button onclick="hideShipperModal()" class="text-gray-400 hover:text-gray-500">
                         <i class="fas fa-times"></i>
                     </button>
@@ -121,11 +121,11 @@
                     <div class="space-y-4">
                         <input type="hidden" id="shipperId">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Họ tên</label>
+                            <label class="block text-sm font-medium text-gray-700">Full name</label>
                             <input type="text" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Số điện thoại</label>
+                            <label class="block text-sm font-medium text-gray-700">Phone number</label>
                             <input type="tel" id="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
@@ -133,36 +133,36 @@
                             <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Khu vực hoạt động</label>
+                            <label class="block text-sm font-medium text-gray-700">Operating area</label>
                             <select id="area" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                <option value="north">Miền Bắc</option>
-                                <option value="central">Miền Trung</option>
-                                <option value="south">Miền Nam</option>
+                                <option value="north">North</option>
+                                <option value="central">Central</option>
+                                <option value="south">South</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Loại phương tiện</label>
+                            <label class="block text-sm font-medium text-gray-700">Vehicle type</label>
                             <select id="vehicleType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                <option value="motorcycle">Xe máy</option>
-                                <option value="car">Ô tô</option>
-                                <option value="truck">Xe tải</option>
+                                <option value="motorcycle">Motorcycle</option>
+                                <option value="car">Car</option>
+                                <option value="truck">Truck</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Biển số xe</label>
+                            <label class="block text-sm font-medium text-gray-700">License plate</label>
                             <input type="text" id="vehicleNumber" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Trạng thái</label>
+                            <label class="block text-sm font-medium text-gray-700">Status</label>
                             <select id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                <option value="active">Hoạt động</option>
-                                <option value="inactive">Ngừng hoạt động</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
                             </select>
                         </div>
                     </div>
                     <div class="mt-6">
                         <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Lưu thay đổi
+                            Save changes
                         </button>
                     </div>
                 </form>
@@ -182,19 +182,19 @@
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
                             <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="detailsTitle">
-                                Chi tiết Shipper
+                                Shipper details
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Basic Information -->
                                 <div class="bg-gray-50 p-4 rounded-lg">
-                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Thông tin cơ bản</h4>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Basic information</h4>
                                     <dl class="space-y-2">
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Họ tên:</dt>
+                                            <dt class="text-sm text-gray-500">Full name:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsName"></dd>
                                         </div>
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">SĐT:</dt>
+                                            <dt class="text-sm text-gray-500">Phone:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsPhone"></dd>
                                         </div>
                                         <div class="flex justify-between">
@@ -202,11 +202,11 @@
                                             <dd class="text-sm text-gray-900" id="detailsEmail"></dd>
                                         </div>
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Khu vực:</dt>
+                                            <dt class="text-sm text-gray-500">Area:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsArea"></dd>
                                         </div>
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Trạng thái:</dt>
+                                            <dt class="text-sm text-gray-500">Status:</dt>
                                             <dd id="detailsStatus"></dd>
                                         </div>
                                     </dl>
@@ -214,22 +214,22 @@
 
                                 <!-- Statistics -->
                                 <div class="bg-gray-50 p-4 rounded-lg">
-                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Thống kê</h4>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Statistics</h4>
                                     <dl class="space-y-2">
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Tổng đơn hàng:</dt>
+                                            <dt class="text-sm text-gray-500">Total orders:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsTotalOrders"></dd>
                                         </div>
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Tỷ lệ thành công:</dt>
+                                            <dt class="text-sm text-gray-500">Success rate:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsSuccessRate"></dd>
                                         </div>
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Đánh giá trung bình:</dt>
+                                            <dt class="text-sm text-gray-500">Average rating:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsRating"></dd>
                                         </div>
                                         <div class="flex justify-between">
-                                            <dt class="text-sm text-gray-500">Thời gian giao trung bình:</dt>
+                                            <dt class="text-sm text-gray-500">Average delivery time:</dt>
                                             <dd class="text-sm text-gray-900" id="detailsAvgTime"></dd>
                                         </div>
                                     </dl>
@@ -237,7 +237,7 @@
 
                                 <!-- Recent Orders -->
                                 <div class="md:col-span-2">
-                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Đơn hàng gần đây</h4>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Recent orders</h4>
                                     <div class="bg-white shadow overflow-hidden sm:rounded-md">
                                         <ul role="list" class="divide-y divide-gray-200" id="detailsRecentOrders">
                                             <!-- Recent orders will be dynamically added here -->
@@ -250,7 +250,7 @@
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button" onclick="closeDetailsModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Đóng
+                        Close
                     </button>
                 </div>
             </div>
@@ -266,9 +266,6 @@
     $(document).ready(function() {
         // Initialize DataTable
         table = $('#shippersTable').DataTable({
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json'
-            },
             columns: [
                 { data: 'id' },
                 { 
@@ -302,8 +299,8 @@
                             inactive: 'bg-red-100 text-red-800'
                         };
                         const statusText = {
-                            active: 'Hoạt động',
-                            inactive: 'Ngừng hoạt động'
+                            active: 'Active',
+                            inactive: 'Inactive'
                         };
                         return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClasses[data]}">${statusText[data]}</span>`;
                     }
@@ -313,8 +310,8 @@
                     render: function(data) {
                         return `
                             <div>
-                                <div class="text-sm text-gray-900">${data.total_orders || 0} đơn</div>
-                                <div class="text-sm text-gray-500">${data.success_rate || 0}% thành công</div>
+                                <div class="text-sm text-gray-900">${data.total_orders || 0} orders</div>
+                                <div class="text-sm text-gray-500">${data.success_rate || 0}% success</div>
                             </div>
                         `;
                     }
@@ -362,7 +359,7 @@
             updateStats();
         } catch (error) {
             console.error('Error loading shippers:', error);
-            alert('Có lỗi khi tải dữ liệu. Vui lòng thử lại.');
+            alert('Failed to load data. Please try again.');
         }
     }
 
@@ -381,7 +378,7 @@
 
     // Show add shipper modal
     function openAddShipperModal() {
-        document.getElementById('modalTitle').textContent = 'Thêm Shipper mới';
+        document.getElementById('modalTitle').textContent = 'Add new shipper';
         document.getElementById('shipperId').value = '';
         document.getElementById('shipperForm').reset();
         document.getElementById('shipperModal').classList.remove('hidden');
@@ -399,7 +396,7 @@
         const shipper = shippers.find(s => s.id === id);
         if (!shipper) return;
 
-        document.getElementById('modalTitle').textContent = 'Chỉnh sửa Shipper';
+        document.getElementById('modalTitle').textContent = 'Edit shipper';
         document.getElementById('shipperId').value = shipper.id;
         document.getElementById('name').value = shipper.name;
         document.getElementById('phone').value = shipper.phone;
@@ -444,16 +441,16 @@
 
             hideShipperModal();
             loadShippers();
-            alert(formData.id ? 'Cập nhật thành công!' : 'Thêm mới thành công!');
+            alert(formData.id ? 'Updated successfully!' : 'Created successfully!');
         } catch (error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            alert('An error occurred. Please try again.');
         }
     }
 
     // Toggle shipper status
     async function toggleShipperStatus(id) {
-        if (!confirm('Bạn có chắc muốn thay đổi trạng thái của shipper này?')) return;
+        if (!confirm('Are you sure you want to change this shipper\'s status?')) return;
 
         try {
             const response = await fetch(`/api/admin/shippers/${id}/toggle-status`, {
@@ -463,16 +460,16 @@
             if (!response.ok) throw new Error('Network response was not ok');
 
             loadShippers();
-            alert('Thay đổi trạng thái thành công!');
+            alert('Status updated successfully!');
         } catch (error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            alert('An error occurred. Please try again.');
         }
     }
 
     // Delete shipper
     async function deleteShipper(id) {
-        if (!confirm('Bạn có chắc muốn xóa shipper này?')) return;
+        if (!confirm('Are you sure you want to delete this shipper?')) return;
 
         try {
             const response = await fetch(`/api/admin/shippers/${id}`, {
@@ -482,28 +479,28 @@
             if (!response.ok) throw new Error('Network response was not ok');
 
             loadShippers();
-            alert('Xóa shipper thành công!');
+            alert('Shipper deleted successfully!');
         } catch (error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            alert('An error occurred. Please try again.');
         }
     }
 
     // View shipper details
     function viewShipperDetails(id) {
         // Add view details functionality here
-        alert('Tính năng đang được phát triển');
+        alert('This feature is under development');
     }
 
     // Export to Excel
     function exportShippers() {
         // Add export functionality here
-        alert('Tính năng đang được phát triển');
+        alert('This feature is under development');
     }
 
     // Helper function for rating stars
     function getRatingStars(rating) {
-        if (!rating) return 'Chưa có đánh giá';
+        if (!rating) return 'No ratings yet';
         
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 >= 0.5;

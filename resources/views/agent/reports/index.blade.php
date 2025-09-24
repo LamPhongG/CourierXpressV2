@@ -1,6 +1,6 @@
 @extends('layouts.unified')
 
-@section('title', 'Báo Cáo Agent - CourierXpress')
+@section('title', 'Agent Reports - CourierXpress')
 
 @section('head')
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,10 +11,10 @@
 
 @section('navigation')
     <a href="/agent/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/agent/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/agent/shippers" class="text-gray-700 hover:text-red-600">Shipper</a>
-    <a href="/agent/reports" class="text-red-600 font-medium">Báo cáo</a>
-    <a href="/tracking" class="text-gray-700 hover:text-red-600">Tra cứu</a>
+    <a href="/agent/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/agent/shippers" class="text-gray-700 hover:text-red-600">Shippers</a>
+    <a href="/agent/reports" class="text-red-600 font-medium">Reports</a>
+    <a href="/tracking" class="text-gray-700 hover:text-red-600">Track</a>
 @endsection
 
 @section('content')
@@ -23,8 +23,8 @@
     <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg shadow-lg p-6 text-white">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
             <div>
-                <h1 class="text-2xl font-bold mb-2">Báo Cáo Agent</h1>
-                <p class="text-purple-100">Theo dõi hiệu suất và phân tích dữ liệu chi nhánh</p>
+                <h1 class="text-2xl font-bold mb-2">Agent Reports</h1>
+                <p class="text-purple-100">Monitor branch performance and analytics</p>
             </div>
             
             <!-- Date Range Picker -->
@@ -33,12 +33,12 @@
                     <input type="date" name="start_date" value="{{ $startDate ?? '' }}" class="px-3 py-2 rounded-md text-gray-800 text-sm">
                     <input type="date" name="end_date" value="{{ $endDate ?? '' }}" class="px-3 py-2 rounded-md text-gray-800 text-sm">
                     <select name="period" class="px-3 py-2 rounded-md text-gray-800 text-sm">
-                        <option value="daily" {{ ($period ?? '') == 'daily' ? 'selected' : '' }}>Theo ngày</option>
-                        <option value="weekly" {{ ($period ?? '') == 'weekly' ? 'selected' : '' }}>Theo tuần</option>
-                        <option value="monthly" {{ ($period ?? '') == 'monthly' ? 'selected' : '' }}>Theo tháng</option>
+                        <option value="daily" {{ ($period ?? '') == 'daily' ? 'selected' : '' }}>Daily</option>
+                        <option value="weekly" {{ ($period ?? '') == 'weekly' ? 'selected' : '' }}>Weekly</option>
+                        <option value="monthly" {{ ($period ?? '') == 'monthly' ? 'selected' : '' }}>Monthly</option>
                     </select>
                     <button type="submit" class="bg-white text-purple-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-search mr-2"></i>Lọc
+                        <i class="fas fa-search mr-2"></i>Filter
                     </button>
                 </form>
             </div>
@@ -47,7 +47,7 @@
 
     @if(isset($error))
     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded">
-        <p class="font-bold">Lỗi:</p>
+        <p class="font-bold">Error:</p>
         <p>{{ $error }}</p>
     </div>
     @endif
@@ -62,7 +62,7 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Tổng đơn hàng</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Total orders</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ number_format($overview['total_orders'] ?? 0) }}</dd>
                         </dl>
                     </div>
@@ -78,9 +78,9 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Đã hoàn thành</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Completed</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ number_format($overview['completed_orders'] ?? 0) }}</dd>
-                            <dd class="text-xs text-green-600">{{ $overview['completion_rate'] ?? 0 }}% tỷ lệ thành công</dd>
+                            <dd class="text-xs text-green-600">{{ $overview['completion_rate'] ?? 0 }}% success rate</dd>
                         </dl>
                     </div>
                 </div>
@@ -95,9 +95,9 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Đang xử lý</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Processing</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ number_format($overview['pending_orders'] ?? 0) }}</dd>
-                            <dd class="text-xs text-yellow-600">Thời gian TB: {{ $overview['average_delivery_time'] ?? 0 }}h</dd>
+                            <dd class="text-xs text-yellow-600">Avg time: {{ $overview['average_delivery_time'] ?? 0 }}h</dd>
                         </dl>
                     </div>
                 </div>
@@ -112,9 +112,9 @@
                     </div>
                     <div class="ml-5 w-0 flex-1">
                         <dl>
-                            <dt class="text-sm font-medium text-gray-500 truncate">Doanh thu</dt>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Revenue</dt>
                             <dd class="text-lg font-medium text-gray-900">{{ number_format($overview['total_revenue'] ?? 0, 0, ',', '.') }} ₫</dd>
-                            <dd class="text-xs text-red-600">Thất bại: {{ number_format($overview['failed_orders'] ?? 0) }}</dd>
+                            <dd class="text-xs text-red-600">Failed: {{ number_format($overview['failed_orders'] ?? 0) }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
         <!-- Orders Trend Chart -->
         <div class="bg-white shadow-lg rounded-lg">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-medium text-gray-900">Xu hướng đơn hàng</h3>
+                <h3 class="text-lg font-medium text-gray-900">Orders trend</h3>
             </div>
             <div class="p-6">
                 <canvas id="ordersTrendChart" width="400" height="200"></canvas>
@@ -137,7 +137,7 @@
         <!-- Revenue Breakdown -->
         <div class="bg-white shadow-lg rounded-lg">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-medium text-gray-900">Phân tích doanh thu</h3>
+                <h3 class="text-lg font-medium text-gray-900">Revenue analysis</h3>
             </div>
             <div class="p-6">
                 <canvas id="revenueChart" width="400" height="200"></canvas>
@@ -150,9 +150,9 @@
         <!-- Shipper Performance -->
         <div class="bg-white shadow-lg rounded-lg">
             <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                <h3 class="text-lg font-medium text-gray-900">Hiệu suất Shipper</h3>
+                <h3 class="text-lg font-medium text-gray-900">Shipper performance</h3>
                 <button onclick="exportReport('shipper_performance')" class="text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700">
-                    <i class="fas fa-download mr-1"></i>Xuất
+                    <i class="fas fa-download mr-1"></i>Export
                 </button>
             </div>
             <div class="overflow-x-auto">
@@ -160,10 +160,10 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shipper</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tổng đơn</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hoàn thành</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tỷ lệ</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doanh thu</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total orders</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completed</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -187,7 +187,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">Không có dữ liệu</td>
+                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">No data</td>
                             </tr>
                         @endif
                     </tbody>
@@ -198,7 +198,7 @@
         <!-- Top Performers -->
         <div class="bg-white shadow-lg rounded-lg">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-medium text-gray-900">Top Shipper xuất sắc</h3>
+                <h3 class="text-lg font-medium text-gray-900">Top Shippers</h3>
             </div>
             <div class="p-6">
                 @if(isset($topShippers) && $topShippers->count() > 0)
@@ -212,7 +212,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-gray-900 truncate">{{ $shipper->name }}</p>
-                                <p class="text-xs text-gray-500">{{ $shipper->total_deliveries }} đơn • {{ number_format($shipper->total_revenue, 0, ',', '.') }} ₫</p>
+                                <p class="text-xs text-gray-500">{{ $shipper->total_deliveries }} orders • {{ number_format($shipper->total_revenue, 0, ',', '.') }} ₫</p>
                             </div>
                             <div class="flex-shrink-0">
                                 <div class="flex items-center">
@@ -226,7 +226,7 @@
                 @else
                     <div class="text-center text-gray-500 py-8">
                         <i class="fas fa-user-friends text-3xl mb-2"></i>
-                        <p>Chưa có dữ liệu shipper</p>
+                        <p>No shipper data</p>
                     </div>
                 @endif
             </div>
@@ -235,23 +235,23 @@
 
     <!-- Quick Actions -->
     <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Thao tác nhanh</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Quick actions</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <button onclick="exportReport('overview')" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 transition-colors">
                 <i class="fas fa-file-export text-xl mb-2"></i>
-                <div class="text-sm">Xuất tổng quan</div>
+                <div class="text-sm">Export overview</div>
             </button>
             <button onclick="exportReport('detailed')" class="bg-green-600 text-white p-4 rounded-lg hover:bg-green-700 transition-colors">
                 <i class="fas fa-table text-xl mb-2"></i>
-                <div class="text-sm">Báo cáo chi tiết</div>
+                <div class="text-sm">Detailed report</div>
             </button>
             <button onclick="printReport()" class="bg-purple-600 text-white p-4 rounded-lg hover:bg-purple-700 transition-colors">
                 <i class="fas fa-print text-xl mb-2"></i>
-                <div class="text-sm">In báo cáo</div>
+                <div class="text-sm">Print report</div>
             </button>
             <button onclick="refreshReport()" class="bg-orange-600 text-white p-4 rounded-lg hover:bg-orange-700 transition-colors">
                 <i class="fas fa-sync text-xl mb-2"></i>
-                <div class="text-sm">Làm mới</div>
+                <div class="text-sm">Refresh</div>
             </button>
         </div>
     </div>
@@ -259,11 +259,14 @@
 @endsection
 
 @section('scripts')
+<script id="trends-data" type="application/json">{!! json_encode($trends ?? []) !!}</script>
+<script id="revenue-data" type="application/json">{!! json_encode($revenueBreakdown ?? []) !!}</script>
+<script id="service-data" type="application/json">{!! json_encode($serviceBreakdown ?? []) !!}</script>
 <script>
-// Data for charts from PHP
-const trendsData = @json($trends ?? []);
-const revenueData = @json($revenueBreakdown ?? []);
-const serviceData = @json($serviceBreakdown ?? []);
+// Data for charts from PHP (loaded from JSON script tags to avoid linter issues)
+const trendsData = JSON.parse(document.getElementById('trends-data')?.textContent || '[]');
+const revenueData = JSON.parse(document.getElementById('revenue-data')?.textContent || '{}');
+const serviceData = JSON.parse(document.getElementById('service-data')?.textContent || '{}');
 
 // Initialize charts when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -290,14 +293,14 @@ function initializeOrdersTrendChart() {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Tổng đơn hàng',
+                label: 'Total orders',
                 data: totalOrders,
                 borderColor: 'rgb(99, 102, 241)',
                 backgroundColor: 'rgba(99, 102, 241, 0.1)',
                 tension: 0.4,
                 fill: true
             }, {
-                label: 'Đã hoàn thành',
+                label: 'Completed',
                 data: completedOrders,
                 borderColor: 'rgb(34, 197, 94)',
                 backgroundColor: 'rgba(34, 197, 94, 0.1)',
@@ -334,7 +337,7 @@ function initializeRevenueChart() {
     if (!ctx) return;
     
     const data = {
-        labels: ['Phí giao hàng', 'Tiền thu hộ (COD)', 'Khác'],
+        labels: ['Shipping fees', 'COD amount', 'Other'],
         datasets: [{
             data: [
                 revenueData.shipping_fees || 0,
@@ -365,7 +368,7 @@ function initializeRevenueChart() {
                     callbacks: {
                         label: function(context) {
                             const value = context.parsed;
-                            return context.label + ': ' + new Intl.NumberFormat('vi-VN', {
+                            return context.label + ': ' + new Intl.NumberFormat('en-US', {
                                 style: 'currency',
                                 currency: 'VND'
                             }).format(value);
@@ -379,12 +382,12 @@ function initializeRevenueChart() {
 
 // Export report function
 function exportReport(type) {
-    console.log('Xuất báo cáo:', type);
+    console.log('Export report:', type);
     
     // Show loading
     const button = event.target;
     const originalText = button.innerHTML;
-    button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Xuất...';
+    button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Exporting...';
     button.disabled = true;
     
     // Get current form data
@@ -407,14 +410,14 @@ function exportReport(type) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Báo cáo đã được xuất thành công!');
+            alert('Report exported successfully!');
         } else {
-            alert('Lỗi: ' + (data.message || 'Không thể xuất báo cáo'));
+            alert('Error: ' + (data.message || 'Unable to export report'));
         }
     })
     .catch(error => {
         console.error('Export error:', error);
-        alert('Có lỗi xảy ra khi xuất báo cáo');
+        alert('An error occurred while exporting report');
     })
     .finally(() => {
         // Restore button
@@ -450,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Format currency helper
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('vi-VN', {
+    return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'VND'
     }).format(amount);
@@ -458,7 +461,7 @@ function formatCurrency(amount) {
 
 // Format number helper  
 function formatNumber(num) {
-    return new Intl.NumberFormat('vi-VN').format(num);
+    return new Intl.NumberFormat('en-US').format(num);
 }
 
 // Print styles for better print layout

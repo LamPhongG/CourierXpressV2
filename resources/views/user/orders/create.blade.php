@@ -546,8 +546,8 @@
                     const message = `Order created successfully!\nTracking number: ${data.data.tracking_number || data.data.id}`;
                     alert(message);
                     
-                    // Redirect to order details or orders list
-                    window.location.href = `/user/orders/${data.data.id}`;
+                    // Redirect to user dashboard after successful creation
+                    window.location.href = `/user/dashboard`;
                 } else {
                     throw new Error(data.message || 'Invalid server response');
                 }

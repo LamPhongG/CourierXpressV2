@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,9 +40,9 @@
                 </div>
                 <nav class="hidden md:flex items-center space-x-6">
                     <a href="/admin/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-                    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-                    <a href="/admin/users" class="text-gray-700 hover:text-red-600">Người dùng</a>
-                    <a href="/admin/settings" class="text-gray-700 hover:text-red-600">Cài đặt</a>
+                    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+                    <a href="/admin/users" class="text-gray-700 hover:text-red-600">Users</a>
+                    <a href="/admin/settings" class="text-gray-700 hover:text-red-600">Settings</a>
                     <a href="/admin/audit" class="text-red-600 font-medium">Audit Logs</a>
                 </nav>
                 <div class="flex items-center space-x-4">
@@ -53,7 +53,7 @@
                         <span class="text-gray-700 font-medium">{{ auth()->user()->name }}</span>
                     </div>
                     <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
                     </button>
                 </div>
             </div>
@@ -83,7 +83,7 @@
         <div class="mb-8">
             <div class="bg-gradient-to-r from-indigo-600 to-purple-700 rounded-lg shadow-lg p-6 text-white">
                 <h1 class="text-3xl font-bold mb-2">Audit Logs</h1>
-                <p class="text-indigo-100">Theo dõi và kiểm tra tất cả các hoạt động trong hệ thống</p>
+                <p class="text-indigo-100">Monitor and review all activities in the system</p>
             </div>
         </div>
 
@@ -95,7 +95,7 @@
                         <i class="fas fa-list text-blue-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Tổng hoạt động</p>
+                        <p class="text-sm text-gray-600">Total activities</p>
                         <p class="text-2xl font-bold text-gray-900" id="totalActions">-</p>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <i class="fas fa-calendar-day text-green-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Hôm nay</p>
+                        <p class="text-sm text-gray-600">Today</p>
                         <p class="text-2xl font-bold text-gray-900" id="todayActions">-</p>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                         <i class="fas fa-users text-purple-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Người dùng hoạt động</p>
+                        <p class="text-sm text-gray-600">Active users</p>
                         <p class="text-2xl font-bold text-gray-900" id="uniqueUsers">-</p>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                         <i class="fas fa-chart-line text-orange-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Hoạt động cao nhất</p>
+                        <p class="text-sm text-gray-600">Top action</p>
                         <p class="text-lg font-bold text-gray-900" id="topAction">-</p>
                     </div>
                 </div>
@@ -140,36 +140,36 @@
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 lg:mb-0">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Loại hoạt động</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Action type</label>
                         <select id="actionFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Tất cả hoạt động</option>
-                            <option value="login">Đăng nhập</option>
-                            <option value="user">Quản lý người dùng</option>
-                            <option value="order">Quản lý đơn hàng</option>
-                            <option value="settings">Cài đặt hệ thống</option>
-                            <option value="system">Hệ thống</option>
+                            <option value="">All actions</option>
+                            <option value="login">Login</option>
+                            <option value="user">User management</option>
+                            <option value="order">Order management</option>
+                            <option value="settings">System settings</option>
+                            <option value="system">System</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Từ ngày</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">From date</label>
                         <input type="date" id="dateFromFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Đến ngày</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">To date</label>
                         <input type="date" id="dateToFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div class="flex items-end">
                         <button onclick="applyFilters()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
-                            <i class="fas fa-filter mr-2"></i>Lọc
+                            <i class="fas fa-filter mr-2"></i>Filter
                         </button>
                     </div>
                 </div>
                 <div class="flex space-x-2">
                     <button onclick="exportLogs()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
-                        <i class="fas fa-download mr-2"></i>Xuất CSV
+                        <i class="fas fa-download mr-2"></i>Export CSV
                     </button>
                     <button onclick="refreshLogs()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
-                        <i class="fas fa-refresh mr-2"></i>Làm mới
+                        <i class="fas fa-refresh mr-2"></i>Refresh
                     </button>
                 </div>
             </div>
@@ -178,18 +178,18 @@
         <!-- Logs Table -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900">Lịch sử hoạt động</h3>
+                <h3 class="text-lg font-semibold text-gray-900">Activity history</h3>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thời gian</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Người dùng</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hoạt động</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mô tả</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP Address</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thao tác</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="logsTableBody" class="bg-white divide-y divide-gray-200">
@@ -200,7 +200,7 @@
             <div class="bg-gray-50 px-6 py-3">
                 <div class="flex items-center justify-between">
                     <div class="text-sm text-gray-700">
-                        Hiển thị <span id="showingFrom">1</span> đến <span id="showingTo">15</span> của <span id="totalLogs">0</span> bản ghi
+                        Showing <span id="showingFrom">1</span> to <span id="showingTo">15</span> of <span id="totalLogs">0</span> records
                     </div>
                     <div class="flex space-x-2" id="pagination">
                         <!-- Pagination will be loaded here -->
@@ -218,14 +218,14 @@
             </div>
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Chi tiết hoạt động</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Activity details</h3>
                     <div id="logDetailContent">
                         <!-- Detail content will be loaded here -->
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button onclick="hideLogDetail()" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:w-auto sm:text-sm">
-                        Đóng
+                        Close
                     </button>
                 </div>
             </div>
@@ -273,21 +273,21 @@
                 updateShowingInfo(data);
             } catch (error) {
                 console.error('Error loading logs:', error);
-                showNotification('Lỗi khi tải dữ liệu audit logs', 'error');
+                showNotification('Error loading audit logs', 'error');
             }
         }
 
         function renderLogsTable(logs) {
             const tbody = document.getElementById('logsTableBody');
             if (!logs || logs.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">Không có dữ liệu</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No data</td></tr>';
                 return;
             }
 
             tbody.innerHTML = logs.map(log => `
                 <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        ${new Date(log.created_at).toLocaleString('vi-VN')}
+                        ${new Date(log.created_at).toLocaleString('en-US')}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${log.user_name || 'System'}
@@ -312,11 +312,11 @@
 
         function getActionBadge(action) {
             const actionTypes = {
-                'login': { color: 'bg-green-100 text-green-800', text: 'Đăng nhập' },
-                'user': { color: 'bg-blue-100 text-blue-800', text: 'Người dùng' },
-                'order': { color: 'bg-purple-100 text-purple-800', text: 'Đơn hàng' },
-                'settings': { color: 'bg-orange-100 text-orange-800', text: 'Cài đặt' },
-                'system': { color: 'bg-gray-100 text-gray-800', text: 'Hệ thống' }
+                'login': { color: 'bg-green-100 text-green-800', text: 'Login' },
+                'user': { color: 'bg-blue-100 text-blue-800', text: 'User' },
+                'order': { color: 'bg-purple-100 text-purple-800', text: 'Order' },
+                'settings': { color: 'bg-orange-100 text-orange-800', text: 'Settings' },
+                'system': { color: 'bg-gray-100 text-gray-800', text: 'System' }
             };
 
             const type = action.split('.')[0];
@@ -336,7 +336,7 @@
             
             // Previous button
             if (data.current_page > 1) {
-                paginationHTML += `<button onclick="loadLogs(${data.current_page - 1})" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">Trước</button>`;
+                paginationHTML += `<button onclick=\"loadLogs(${data.current_page - 1})\" class=\"px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50\">Previous</button>`;
             }
 
             // Page numbers
@@ -347,7 +347,7 @@
 
             // Next button
             if (data.current_page < data.last_page) {
-                paginationHTML += `<button onclick="loadLogs(${data.current_page + 1})" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">Sau</button>`;
+                paginationHTML += `<button onclick=\"loadLogs(${data.current_page + 1})\" class=\"px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50\">Next</button>`;
             }
 
             pagination.innerHTML = paginationHTML;
@@ -390,7 +390,7 @@
                 window.open(`/admin/api/audit/export?${params}`, '_blank');
             } catch (error) {
                 console.error('Error exporting logs:', error);
-                showNotification('Lỗi khi xuất dữ liệu', 'error');
+                showNotification('Error exporting data', 'error');
             }
         }
 
@@ -407,11 +407,11 @@
                                 <p class="text-sm text-gray-900">${log.id}</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700">Thời gian</label>
-                                <p class="text-sm text-gray-900">${new Date(log.created_at).toLocaleString('vi-VN')}</p>
+                                <label class="block text-sm font-medium text-gray-700">Time</label>
+                                <p class="text-sm text-gray-900">${new Date(log.created_at).toLocaleString('en-US')}</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700">Người dùng</label>
+                                <label class="block text-sm font-medium text-gray-700">User</label>
                                 <p class="text-sm text-gray-900">${log.user_name || 'System'}</p>
                             </div>
                             <div>
@@ -420,11 +420,11 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Hoạt động</label>
+                            <label class="block text-sm font-medium text-gray-700">Action</label>
                             <p class="text-sm text-gray-900">${log.action}</p>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Mô tả</label>
+                            <label class="block text-sm font-medium text-gray-700">Description</label>
                             <p class="text-sm text-gray-900">${log.description}</p>
                         </div>
                         <div>
@@ -432,7 +432,7 @@
                             <p class="text-sm text-gray-900 break-all">${log.user_agent}</p>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Chi tiết</label>
+                            <label class="block text-sm font-medium text-gray-700">Details</label>
                             <pre class="text-sm text-gray-900 bg-gray-100 p-3 rounded overflow-auto">${JSON.stringify(log.details, null, 2)}</pre>
                         </div>
                     </div>
@@ -442,7 +442,7 @@
                 document.getElementById('logDetailModal').classList.remove('hidden');
             } catch (error) {
                 console.error('Error loading log detail:', error);
-                showNotification('Lỗi khi tải chi tiết', 'error');
+                showNotification('Error loading details', 'error');
             }
         }
 
@@ -471,7 +471,7 @@
         }
 
         function logout() {
-            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+            if (confirm('Are you sure you want to logout?')) {
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = '/logout';

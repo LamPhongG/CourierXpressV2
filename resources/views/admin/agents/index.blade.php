@@ -1,6 +1,6 @@
 @extends('layouts.unified')
 
-@section('title', 'Admin - Quản lý Agent | CourierXpress')
+@section('title', 'Admin - Agents Management | CourierXpress')
 
 @section('head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.tailwindcss.min.css">
@@ -11,11 +11,11 @@
 
 @section('navigation')
     <a href="/admin/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/admin/agents" class="text-red-600 font-medium">Chi nhánh</a>
-    <a href="/admin/shippers" class="text-gray-700 hover:text-red-600">Shipper</a>
-    <a href="/admin/reports" class="text-gray-700 hover:text-red-600">Báo cáo</a>
-    <a href="/admin/settings" class="text-gray-700 hover:text-red-600">Cài đặt</a>
+    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/admin/agents" class="text-red-600 font-medium">Agents</a>
+    <a href="/admin/shippers" class="text-gray-700 hover:text-red-600">Shippers</a>
+    <a href="/admin/reports" class="text-gray-700 hover:text-red-600">Reports</a>
+    <a href="/admin/settings" class="text-gray-700 hover:text-red-600">Settings</a>
 @endsection
 
 @section('content')
@@ -23,15 +23,15 @@
     <div class="mb-6">
         <div class="flex justify-between items-center">
             <div>
-                <h2 class="text-3xl font-bold text-gray-900">Quản lý Agent</h2>
-                <p class="mt-2 text-gray-600">Quản lý danh sách agent và phân quyền</p>
+                <h2 class="text-3xl font-bold text-gray-900">Agents Management</h2>
+                <p class="mt-2 text-gray-600">Manage agents list and permissions</p>
             </div>
             <div class="flex space-x-3">
                 <button onclick="showAddAgentModal()" class="bg-primary hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
-                    <i class="fas fa-plus mr-2"></i> Thêm Agent
+                    <i class="fas fa-plus mr-2"></i> Add Agent
                 </button>
                 <button onclick="exportAgents()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
-                    <i class="fas fa-download mr-2"></i> Xuất Excel
+                    <i class="fas fa-download mr-2"></i> Export Excel
                 </button>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     <i class="fas fa-user-tie text-blue-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Tổng Agent</p>
+                    <p class="text-gray-600 text-sm">Total agents</p>
                     <p id="totalAgents" class="text-2xl font-bold text-blue-600">-</p>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <i class="fas fa-check-circle text-green-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Đang hoạt động</p>
+                    <p class="text-gray-600 text-sm">Active</p>
                     <p id="activeAgents" class="text-2xl font-bold text-green-600">-</p>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     <i class="fas fa-clock text-yellow-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Chờ xác nhận</p>
+                    <p class="text-gray-600 text-sm">Pending approval</p>
                     <p id="pendingAgents" class="text-2xl font-bold text-yellow-600">-</p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     <i class="fas fa-times-circle text-red-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-gray-600 text-sm">Tạm khóa</p>
+                    <p class="text-gray-600 text-sm">Blocked</p>
                     <p id="blockedAgents" class="text-2xl font-bold text-red-600">-</p>
                 </div>
             </div>
@@ -92,12 +92,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tên chi nhánh</th>
-                        <th>Địa chỉ</th>
-                        <th>Quản lý</th>
-                        <th>SĐT</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
+                        <th>Branch name</th>
+                        <th>Address</th>
+                        <th>Manager</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,7 +112,7 @@
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Thêm Agent mới</h3>
+                    <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Add new Agent</h3>
                     <button onclick="hideAgentModal()" class="text-gray-400 hover:text-gray-500">
                         <i class="fas fa-times"></i>
                     </button>
@@ -121,19 +121,19 @@
                     <div class="space-y-4">
                         <input type="hidden" id="agentId">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Tên chi nhánh</label>
+                            <label class="block text-sm font-medium text-gray-700">Branch name</label>
                             <input type="text" id="agentName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Địa chỉ</label>
+                            <label class="block text-sm font-medium text-gray-700">Address</label>
                             <input type="text" id="agentAddress" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Tên quản lý</label>
+                            <label class="block text-sm font-medium text-gray-700">Manager name</label>
                             <input type="text" id="managerName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Số điện thoại</label>
+                            <label class="block text-sm font-medium text-gray-700">Phone number</label>
                             <input type="tel" id="agentPhone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
@@ -141,17 +141,17 @@
                             <input type="email" id="agentEmail" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Trạng thái</label>
+                            <label class="block text-sm font-medium text-gray-700">Status</label>
                             <select id="agentStatus" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                <option value="active">Hoạt động</option>
-                                <option value="pending">Chờ xác nhận</option>
-                                <option value="blocked">Tạm khóa</option>
+                                <option value="active">Active</option>
+                                <option value="pending">Pending approval</option>
+                                <option value="blocked">Blocked</option>
                             </select>
                         </div>
                     </div>
                     <div class="mt-6">
                         <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Lưu thay đổi
+                            Save changes
                         </button>
                     </div>
                 </form>
@@ -169,7 +169,7 @@
         // Initialize DataTable
         table = $('#agentsTable').DataTable({
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json'
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/en-GB.json'
             },
             columns: [
                 { 
@@ -178,27 +178,27 @@
                 },
                 { 
                     data: 'name',
-                    title: 'Tên chi nhánh',
-                    defaultContent: 'Chưa cập nhật'
+                    title: 'Branch name',
+                    defaultContent: 'Not updated'
                 },
                 { 
                     data: 'address',
-                    title: 'Địa chỉ',
-                    defaultContent: 'Chưa cập nhật'
+                    title: 'Address',
+                    defaultContent: 'Not updated'
                 },
                 { 
                     data: 'manager',
-                    title: 'Quản lý',
-                    defaultContent: 'Chưa cập nhật'
+                    title: 'Manager',
+                    defaultContent: 'Not updated'
                 },
                 { 
                     data: 'phone',
-                    title: 'SĐT',
-                    defaultContent: 'Chưa cập nhật'
+                    title: 'Phone',
+                    defaultContent: 'Not updated'
                 },
                 { 
                     data: 'status',
-                    title: 'Trạng thái',
+                    title: 'Status',
                     render: function(data, type, row) {
                         if (type === 'display') {
                             const statusClasses = {
@@ -207,9 +207,9 @@
                                 blocked: 'bg-red-100 text-red-800'
                             };
                             const statusText = {
-                                active: 'Hoạt động',
-                                pending: 'Chờ xác nhận',
-                                blocked: 'Tạm khóa'
+                                active: 'Active',
+                                pending: 'Pending approval',
+                                blocked: 'Blocked'
                             };
                             const badgeClass = statusClasses[data] || 'bg-gray-100 text-gray-800';
                             const text = statusText[data] || data;
@@ -220,19 +220,19 @@
                 },
                 {
                     data: null,
-                    title: 'Thao tác',
+                    title: 'Actions',
                     orderable: false,
                     render: function(data, type, row) {
                         if (type === 'display') {
                             return `
                                 <div class="flex space-x-2">
-                                    <button onclick="editAgent('${row.id}')" class="text-blue-600 hover:text-blue-900" title="Chỉnh sửa">
+                                    <button onclick="editAgent('${row.id}')" class="text-blue-600 hover:text-blue-900" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button onclick="toggleAgentStatus('${row.id}')" class="text-yellow-600 hover:text-yellow-900" title="Thay đổi trạng thái">
+                                    <button onclick="toggleAgentStatus('${row.id}')" class="text-yellow-600 hover:text-yellow-900" title="Toggle status">
                                         <i class="fas fa-power-off"></i>
                                     </button>
-                                    <button onclick="deleteAgent('${row.id}')" class="text-red-600 hover:text-red-900" title="Xóa">
+                                    <button onclick="deleteAgent('${row.id}')" class="text-red-600 hover:text-red-900" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -325,7 +325,7 @@
 
     // Show add agent modal
     function showAddAgentModal() {
-        document.getElementById('modalTitle').textContent = 'Thêm Agent mới';
+        document.getElementById('modalTitle').textContent = 'Add new Agent';
         document.getElementById('agentId').value = '';
         document.getElementById('agentForm').reset();
         document.getElementById('agentModal').classList.remove('hidden');
@@ -343,7 +343,7 @@
         const agent = agents.find(a => a.id === id);
         if (!agent) return;
 
-        document.getElementById('modalTitle').textContent = 'Chỉnh sửa Agent';
+        document.getElementById('modalTitle').textContent = 'Edit Agent';
         document.getElementById('agentId').value = agent.id;
         document.getElementById('agentName').value = agent.name;
         document.getElementById('agentAddress').value = agent.address;
@@ -391,19 +391,19 @@
             if (result.success) {
                 hideAgentModal();
                 loadAgents();
-                alert(formData.id ? 'Cập nhật thành công!' : 'Thêm mới thành công!');
+                alert(formData.id ? 'Updated successfully!' : 'Created successfully!');
             } else {
-                alert(result.message || 'Có lỗi xảy ra');
+                alert(result.message || 'An error occurred');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            alert('An error occurred. Please try again.');
         }
     }
 
     // Toggle agent status
     async function toggleAgentStatus(id) {
-        if (!confirm('Bạn có chắc muốn thay đổi trạng thái của agent này?')) return;
+        if (!confirm('Are you sure you want to change this agent\'s status?')) return;
 
         try {
             const response = await fetch(`/api/admin/agents/${id}/toggle-status`, {
@@ -420,19 +420,19 @@
             
             if (result.success) {
                 loadAgents();
-                alert('Thay đổi trạng thái thành công!');
+                alert('Status updated successfully!');
             } else {
-                alert(result.message || 'Có lỗi xảy ra');
+                alert(result.message || 'An error occurred');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            alert('An error occurred. Please try again.');
         }
     }
 
     // Delete agent
     async function deleteAgent(id) {
-        if (!confirm('Bạn có chắc muốn xóa agent này?')) return;
+        if (!confirm('Are you sure you want to delete this agent?')) return;
 
         try {
             const response = await fetch(`/api/admin/agents/${id}`, {
@@ -449,20 +449,20 @@
             
             if (result.success) {
                 loadAgents();
-                alert('Xóa agent thành công!');
+                alert('Agent deleted successfully!');
             } else {
-                alert(result.message || 'Có lỗi xảy ra');
+                alert(result.message || 'An error occurred');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            alert('An error occurred. Please try again.');
         }
     }
 
     // Export to Excel
     function exportAgents() {
         // Add export functionality here
-        alert('Tính năng đang được phát triển');
+        alert('This feature is under development');
     }
 
     // Check authentication on page load

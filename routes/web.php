@@ -284,6 +284,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/orders', function() { return view('admin.orders.index'); })->name('orders');
         Route::get('/agents', function() { return view('admin.agents.index'); })->name('agents');
         Route::get('/shippers', function() { return view('admin.shippers.index'); })->name('shippers');
+        Route::get('/drivers', function() { return view('admin.drivers.index'); })->name('drivers');
         Route::get('/settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings');
         Route::get('/reports', function() { return view('admin.reports.index'); })->name('reports');
         Route::get('/audit', [\App\Http\Controllers\Admin\AuditLogController::class, 'index'])->name('audit');

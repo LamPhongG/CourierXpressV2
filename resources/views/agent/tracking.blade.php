@@ -1,13 +1,13 @@
 @extends('layouts.unified')
 
-@section('title', 'Theo dõi đơn hàng - Agent')
+@section('title', 'Order Tracking - Agent')
 
 @section('navigation')
     <a href="/agent/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/agent/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/agent/tracking" class="text-red-600 font-medium">Theo dõi</a>
-    <a href="/agent/shippers" class="text-gray-700 hover:text-red-600">Shipper</a>
-    <a href="/agent/reports" class="text-gray-700 hover:text-red-600">Báo cáo</a>
+    <a href="/agent/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/agent/tracking" class="text-red-600 font-medium">Tracking</a>
+    <a href="/agent/shippers" class="text-gray-700 hover:text-red-600">Shippers</a>
+    <a href="/agent/reports" class="text-gray-700 hover:text-red-600">Reports</a>
 @endsection
 
 @section('content')
@@ -16,8 +16,8 @@
         <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-lg shadow-lg p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold mb-2">Theo dõi đơn hàng khu vực</h1>
-                    <p class="text-green-100">Quản lý và theo dõi các đơn hàng trong khu vực phụ trách</p>
+                    <h1 class="text-2xl font-bold mb-2">Area Order Tracking</h1>
+                    <p class="text-green-100">Manage and track orders within your responsible area</p>
                 </div>
                 <div class="hidden md:block">
                     <i class="fas fa-map-marked-alt text-4xl text-green-200"></i>
@@ -34,7 +34,7 @@
                     <i class="fas fa-clipboard-list text-blue-600 text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-gray-500 text-sm">Đơn hàng hôm nay</p>
+                    <p class="text-gray-500 text-sm">Today's orders</p>
                     <p class="text-2xl font-bold text-gray-900" id="todayOrders">-</p>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <i class="fas fa-clock text-yellow-600 text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-gray-500 text-sm">Chờ phân công</p>
+                    <p class="text-gray-500 text-sm">Pending assignment</p>
                     <p class="text-2xl font-bold text-gray-900" id="pendingAssignment">-</p>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <i class="fas fa-shipping-fast text-orange-600 text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-gray-500 text-sm">Đang giao</p>
+                    <p class="text-gray-500 text-sm">Delivering</p>
                     <p class="text-2xl font-bold text-gray-900" id="delivering">-</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-gray-500 text-sm">Có vấn đề</p>
+                    <p class="text-gray-500 text-sm">Issues</p>
                     <p class="text-2xl font-bold text-gray-900" id="problemOrders">-</p>
                 </div>
             </div>
@@ -79,7 +79,7 @@
 
     <!-- Active Shippers Status -->
     <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Trạng thái Shipper</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Shipper status</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="shippersStatus">
             <!-- Shipper status cards will be loaded here -->
         </div>
@@ -87,7 +87,7 @@
 
     <!-- Search and Filter -->
     <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Tìm kiếm đơn hàng</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Search orders</h3>
         <form id="trackingForm" class="space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
@@ -95,29 +95,28 @@
                         type="text" 
                         id="trackingNumber" 
                         name="tracking_number"
-                        placeholder="Mã vận đơn"
+                        placeholder="Tracking number"
                         class="w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-300 focus:border-blue-500"
                     >
                 </div>
                 <div>
                     <select id="statusFilter" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
-                        <option value="">Tất cả trạng thái</option>
-                        <option value="pending">Chờ xử lý</option>
-                        <option value="confirmed">Đã xác nhận</option>
-                        <option value="assigned">Đã phân công</option>
-                        <option value="pickup">Đang lấy hàng</option>
-                        <option value="picked_up">Đã lấy hàng</option>
-                        <option value="in_transit">Đang vận chuyển</option>
-                        <option value="delivering">Đang giao hàng</option>
-                        <option value="delivered">Đã giao</option>
-                        <option value="failed">Thất bại</option>
-                        <option value="cancelled">Đã hủy</option>
+                        <option value="">All statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="assigned">Assigned</option>
+                        <option value="pickup">Picking up</option>
+                        <option value="picked_up">Picked up</option>
+                        <option value="in_transit">In transit</option>
+                        <option value="delivering">Delivering</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="failed">Failed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
                 </div>
                 <div>
                     <select id="shipperFilter" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
-                        <option value="">Tất cả shipper</option>
-                        <!-- Shipper options will be loaded here -->
+                        <option value="">All shippers</option>
                     </select>
                 </div>
             </div>
@@ -127,14 +126,14 @@
                     id="searchBtn"
                     class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors"
                 >
-                    <i class="fas fa-search mr-2"></i>Tìm kiếm
+                    <i class="fas fa-search mr-2"></i>Search
                 </button>
                 <button 
                     type="button" 
                     onclick="resetFilters()"
                     class="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 transition-colors"
                 >
-                    <i class="fas fa-undo mr-2"></i>Đặt lại
+                    <i class="fas fa-undo mr-2"></i>Reset
                 </button>
             </div>
         </form>
@@ -143,13 +142,13 @@
     <!-- Orders List -->
     <div class="bg-white shadow rounded-lg">
         <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-            <h3 class="text-lg font-medium text-gray-900">Danh sách đơn hàng</h3>
+            <h3 class="text-lg font-medium text-gray-900">Orders List</h3>
             <div class="flex space-x-2">
                 <button onclick="refreshOrders()" class="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    <i class="fas fa-sync-alt mr-1"></i>Làm mới
+                    <i class="fas fa-sync-alt mr-1"></i>Refresh
                 </button>
                 <button onclick="exportData()" class="px-3 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
-                    <i class="fas fa-download mr-1"></i>Xuất dữ liệu
+                    <i class="fas fa-download mr-1"></i>Export data
                 </button>
             </div>
         </div>
@@ -157,13 +156,13 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mã đơn</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Khách hàng</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shipper</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trạng thái</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Địa chỉ giao</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thời gian</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thao tác</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delivery address</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="ordersList" class="bg-white divide-y divide-gray-200">
@@ -176,7 +175,7 @@
     <!-- Loading State -->
     <div id="loadingState" class="hidden bg-white rounded-lg shadow p-8 text-center">
         <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-4"></i>
-        <p class="text-gray-600">Đang tải dữ liệu...</p>
+        <p class="text-gray-600">Loading data...</p>
     </div>
 @endsection
 
@@ -194,7 +193,6 @@
             searchOrders();
         });
 
-        // Auto refresh every 30 seconds
         setInterval(refreshOrders, 30000);
     });
     
@@ -238,20 +236,20 @@
                         <div class="flex items-center justify-between mb-2">
                             <span class="font-medium text-gray-900">${shipper.name}</span>
                             <span class="px-2 py-1 text-xs rounded-full ${shipper.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-                                ${shipper.status === 'active' ? 'Hoạt động' : 'Offline'}
+                                ${shipper.status === 'active' ? 'Active' : 'Offline'}
                             </span>
                         </div>
                         <div class="text-sm text-gray-600">
-                            <p>Đơn hàng hiện tại: <strong>${shipper.current_orders || 0}</strong></p>
-                            <p>Hoàn thành hôm nay: <strong>${shipper.completed_today || 0}</strong></p>
-                            <p>Đánh giá: <strong>${shipper.rating || 'N/A'}/5</strong></p>
+                            <p>Current orders: <strong>${shipper.current_orders || 0}</strong></p>
+                            <p>Completed today: <strong>${shipper.completed_today || 0}</strong></p>
+                            <p>Rating: <strong>${shipper.rating || 'N/A'}/5</strong></p>
                         </div>
                         <div class="mt-3 flex space-x-2">
                             <button onclick="viewShipperLocation('${shipper.id}')" class="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200">
-                                Vị trí
+                                Location
                             </button>
                             <button onclick="assignNewOrder('${shipper.id}')" class="text-xs px-2 py-1 bg-green-100 text-green-600 rounded hover:bg-green-200">
-                                Phân công
+                                Assign
                             </button>
                         </div>
                     </div>
@@ -260,7 +258,7 @@
                 container.innerHTML = `
                     <div class="col-span-full text-center text-gray-500 py-8">
                         <i class="fas fa-users text-2xl mb-2"></i>
-                        <p>Chưa có shipper nào trong khu vực</p>
+                        <p>No shippers in the area</p>
                     </div>
                 `;
             }
@@ -324,7 +322,6 @@
         const shipperId = document.getElementById('shipperFilter').value;
         
         if (trackingNumber) {
-            // Search specific order
             showLoading();
             fetch('/api/tracking', {
                 method: 'POST',
@@ -349,7 +346,6 @@
                 displayOrders([]);
             });
         } else {
-            // Apply filters
             loadOrders();
         }
     }
@@ -361,7 +357,7 @@
             tbody.innerHTML = `
                 <tr>
                     <td colspan="7" class="px-6 py-4 text-center text-gray-500">
-                        Không tìm thấy đơn hàng nào
+                        No orders found
                     </td>
                 </tr>
             `;
@@ -382,16 +378,16 @@
         };
         
         const statusTexts = {
-            'pending': 'Chờ xử lý',
-            'confirmed': 'Đã xác nhận',
-            'assigned': 'Đã phân công',
-            'pickup': 'Đang lấy hàng',
-            'picked_up': 'Đã lấy hàng',
-            'in_transit': 'Đang vận chuyển',
-            'delivering': 'Đang giao hàng',
-            'delivered': 'Đã giao',
-            'failed': 'Thất bại',
-            'cancelled': 'Đã hủy'
+            'pending': 'Pending',
+            'confirmed': 'Confirmed',
+            'assigned': 'Assigned',
+            'pickup': 'Picking up',
+            'picked_up': 'Picked up',
+            'in_transit': 'In transit',
+            'delivering': 'Delivering',
+            'delivered': 'Delivered',
+            'failed': 'Failed',
+            'cancelled': 'Cancelled'
         };
         
         tbody.innerHTML = orders.map(order => `
@@ -407,8 +403,8 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     ${order.shipper ? order.shipper.name : 
-                        `<button onclick="assignShipper('${order.id}')" class="text-blue-600 hover:text-blue-800 font-medium">
-                            Phân công
+                        `<button onclick=\"assignShipper('${order.id}')\" class=\"text-blue-600 hover:text-blue-800 font-medium\">
+                            Assign
                         </button>`
                     }
                 </td>
@@ -421,22 +417,22 @@
                     ${order.delivery_address ? order.delivery_address.substring(0, 30) + '...' : 'N/A'}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${new Date(order.created_at).toLocaleDateString('vi-VN')}
+                    ${new Date(order.created_at).toLocaleDateString('en-US')}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div class="flex space-x-2">
-                        <button onclick="viewOrderDetails('${order.id}')" class="text-blue-600 hover:text-blue-900" title="Chi tiết">
+                        <button onclick="viewOrderDetails('${order.id}')" class="text-blue-600 hover:text-blue-900" title="Details">
                             <i class="fas fa-eye"></i>
                         </button>
                         ${!order.shipper ? `
-                            <button onclick="assignShipper('${order.id}')" class="text-green-600 hover:text-green-900" title="Phân công">
+                            <button onclick="assignShipper('${order.id}')" class="text-green-600 hover:text-green-900" title="Assign">
                                 <i class="fas fa-user-plus"></i>
                             </button>
                         ` : ''}
-                        <button onclick="updateOrderStatus('${order.id}')" class="text-orange-600 hover:text-orange-900" title="Cập nhật">
+                        <button onclick="updateOrderStatus('${order.id}')" class="text-orange-600 hover:text-orange-900" title="Update">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button onclick="contactCustomer('${order.pickup_phone}')" class="text-purple-600 hover:text-purple-900" title="Liên hệ">
+                        <button onclick="contactCustomer('${order.pickup_phone}')" class="text-purple-600 hover:text-purple-900" title="Contact">
                             <i class="fas fa-phone"></i>
                         </button>
                     </div>
@@ -470,33 +466,33 @@
     }
     
     function assignShipper(orderId) {
-        alert(`Phân công shipper cho đơn hàng ${orderId}. Chức năng này sẽ được phát triển!`);
+        alert(`Assign shipper for order ${orderId}. This feature will be developed!`);
     }
     
     function updateOrderStatus(orderId) {
-        alert(`Cập nhật trạng thái đơn hàng ${orderId}. Chức năng này sẽ được phát triển!`);
+        alert(`Update status for order ${orderId}. This feature will be developed!`);
     }
     
     function contactCustomer(phone) {
         if (phone) {
-            if (confirm(`Gọi cho khách hàng ${phone}?`)) {
+            if (confirm(`Call customer ${phone}?`)) {
                 window.location.href = `tel:${phone}`;
             }
         } else {
-            alert('Không có thông tin số điện thoại');
+            alert('No phone number available');
         }
     }
     
     function viewShipperLocation(shipperId) {
-        alert(`Xem vị trí shipper ${shipperId}. Chức năng GPS sẽ được phát triển!`);
+        alert(`View shipper location ${shipperId}. GPS feature will be developed!`);
     }
     
     function assignNewOrder(shipperId) {
-        alert(`Phân công đơn hàng mới cho shipper ${shipperId}. Chức năng này sẽ được phát triển!`);
+        alert(`Assign new order to shipper ${shipperId}. This feature will be developed!`);
     }
     
     function exportData() {
-        alert('Xuất dữ liệu thành file Excel. Chức năng này sẽ được phát triển!');
+        alert('Export data to Excel. This feature will be developed!');
     }
 </script>
 @endsection

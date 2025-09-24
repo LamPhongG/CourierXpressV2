@@ -110,12 +110,12 @@
         <!-- Sidebar -->
         <aside class="admin-sidebar w-64 fixed h-full">
             <div class="p-4">
-                <div class="flex items-center space-x-3 mb-8">
+                <a href="/admin/dashboard" class="flex items-center space-x-3 mb-8">
                     <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
                         <i class="fas fa-shipping-fast text-primary text-xl"></i>
                     </div>
                     <span class="text-white text-xl font-bold">CourierXpress</span>
-                </div>
+                </a>
 
                 <nav>
                     <a href="/admin/dashboard" class="sidebar-menu-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">

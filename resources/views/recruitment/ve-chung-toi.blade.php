@@ -17,38 +17,38 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-4xl font-bold mb-6 text-gray-800">Tầm nhìn & Sứ mệnh</h2>
+                    <h2 class="text-4xl font-bold mb-6 text-gray-800">Vision & Mission</h2>
                     <p class="text-lg text-gray-600 mb-6">
-                        CourierXpress được thành lập với sứ mệnh kết nối mọi người thông qua dịch vụ logistics chất lượng cao, 
-                        tạo ra giá trị bền vững cho khách hàng, đối tác và cộng đồng.
+                        CourierXpress was founded with the mission of connecting people through high-quality logistics services, 
+                        creating sustainable value for customers, partners, and the community.
                     </p>
                     <p class="text-lg text-gray-600">
-                        Chúng tôi cam kết trở thành nền tảng logistics số 1 Việt Nam, mang đến trải nghiệm tuyệt vời 
-                        và giải pháp toàn diện cho mọi nhu cầu vận chuyển.
+                        We are committed to becoming Vietnam's leading logistics platform, delivering great experiences 
+                        and comprehensive solutions for every delivery need.
                     </p>
                 </div>
                 <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Thành tựu nổi bật</h3>
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Key achievements</h3>
                     <div class="space-y-4">
                         <div class="flex items-center">
                             <div class="text-3xl font-bold text-orange-600 mr-4">5M+</div>
                             <div>
-                                <p class="font-semibold">Đơn hàng</p>
-                                <p class="text-sm text-gray-600">Đã giao thành công</p>
+                                <p class="font-semibold">Orders</p>
+                                <p class="text-sm text-gray-600">Delivered successfully</p>
                             </div>
                         </div>
                         <div class="flex items-center">
                             <div class="text-3xl font-bold text-orange-600 mr-4">50K+</div>
                             <div>
-                                <p class="font-semibold">Khách hàng</p>
-                                <p class="text-sm text-gray-600">Tin tưởng sử dụng</p>
+                                <p class="font-semibold">Customers</p>
+                                <p class="text-sm text-gray-600">Trust and use our service</p>
                             </div>
                         </div>
                         <div class="flex items-center">
                             <div class="text-3xl font-bold text-orange-600 mr-4">15K+</div>
                             <div>
-                                <p class="font-semibold">Tài xế</p>
-                                <p class="text-sm text-gray-600">Đối tác gắn bó</p>
+                                <p class="font-semibold">Drivers</p>
+                                <p class="text-sm text-gray-600">Long-term partners</p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
     <!-- Values -->
     <div class="bg-white py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Giá trị cốt lõi</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Core values</h2>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="text-center">
@@ -69,8 +69,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold mb-4 text-gray-800">Tận tâm</h3>
-                    <p class="text-gray-600">Đặt khách hàng làm trung tâm, luôn lắng nghe và thấu hiểu</p>
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">Dedication</h3>
+                    <p class="text-gray-600">Customer-centric, always listening and understanding</p>
                 </div>
 
                 <div class="text-center">
@@ -79,8 +79,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold mb-4 text-gray-800">Chất lượng</h3>
-                    <p class="text-gray-600">Cam kết chất lượng dịch vụ cao nhất trong mọi khâu</p>
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">Quality</h3>
+                    <p class="text-gray-600">Committed to the highest service quality in every step</p>
                 </div>
 
                 <div class="text-center">
@@ -89,8 +89,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold mb-4 text-gray-800">Đổi mới</h3>
-                    <p class="text-gray-600">Không ngừng sáng tạo và ứng dụng công nghệ tiên tiến</p>
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">Innovation</h3>
+                    <p class="text-gray-600">Continuously innovating and adopting advanced technology</p>
                 </div>
 
                 <div class="text-center">
@@ -99,8 +99,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold mb-4 text-gray-800">Đoàn kết</h3>
-                    <p class="text-gray-600">Xây dựng tinh thần đồng đội mạnh mẽ và văn hóa chia sẻ</p>
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">Teamwork</h3>
+                    <p class="text-gray-600">Building strong teamwork and a culture of sharing</p>
                 </div>
             </div>
         </div>
@@ -109,10 +109,10 @@
     <!-- CTA -->
     <div class="bg-orange-600 text-white py-20">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Gia nhập đội ngũ CourierXpress</h2>
-            <p class="text-xl mb-8">Cùng chúng tôi xây dựng tương lai logistics Việt Nam</p>
+            <h2 class="text-4xl font-bold mb-6">Join the CourierXpress team</h2>
+            <p class="text-xl mb-8">Let's build the future of Vietnam logistics together</p>
             <button class="bg-white text-orange-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300">
-                Xem cơ hội nghề nghiệp
+                View career opportunities
             </button>
         </div>
     </div>

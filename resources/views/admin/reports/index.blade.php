@@ -1,6 +1,6 @@
 @extends('layouts.unified')
 
-@section('title', 'Admin - Báo cáo Thống kê | CourierXpress')
+@section('title', 'Admin - Analytics Reports | CourierXpress')
 
 @section('head')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,11 +12,11 @@
 
 @section('navigation')
     <a href="/admin/dashboard" class="text-gray-700 hover:text-red-600">Dashboard</a>
-    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Đơn hàng</a>
-    <a href="/admin/agents" class="text-gray-700 hover:text-red-600">Chi nhánh</a>
-    <a href="/admin/shippers" class="text-gray-700 hover:text-red-600">Shipper</a>
-    <a href="/admin/reports" class="text-red-600 font-medium">Báo cáo</a>
-    <a href="/admin/settings" class="text-gray-700 hover:text-red-600">Cài đặt</a>
+    <a href="/admin/orders" class="text-gray-700 hover:text-red-600">Orders</a>
+    <a href="/admin/agents" class="text-gray-700 hover:text-red-600">Agents</a>
+    <a href="/admin/shippers" class="text-gray-700 hover:text-red-600">Shippers</a>
+    <a href="/admin/reports" class="text-red-600 font-medium">Reports</a>
+    <a href="/admin/settings" class="text-gray-700 hover:text-red-600">Settings</a>
 @endsection
 
 @section('content')
@@ -24,12 +24,12 @@
     <div class="mb-6">
         <div class="flex justify-between items-center">
             <div>
-                <h2 class="text-3xl font-bold text-gray-900">Báo cáo Thống kê</h2>
-                <p class="mt-2 text-gray-600">Theo dõi hiệu suất hoạt động và doanh thu</p>
+                <h2 class="text-3xl font-bold text-gray-900">Analytics Reports</h2>
+                <p class="mt-2 text-gray-600">Monitor operational performance and revenue</p>
             </div>
             <div class="flex space-x-3">
                 <button onclick="exportReport()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
-                    <i class="fas fa-download mr-2"></i> Xuất báo cáo
+                    <i class="fas fa-download mr-2"></i> Export report
                 </button>
             </div>
         </div>
@@ -39,26 +39,26 @@
     <div class="bg-white shadow-sm rounded-lg p-6 mb-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Thời gian</h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Time range</h3>
             </div>
             <div class="md:col-span-3">
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     <div>
-                        <label for="period" class="block text-sm font-medium text-gray-700">Kỳ báo cáo</label>
+                        <label for="period" class="block text-sm font-medium text-gray-700">Report period</label>
                         <select id="period" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
-                            <option value="today">Hôm nay</option>
-                            <option value="yesterday">Hôm qua</option>
-                            <option value="week">7 ngày qua</option>
-                            <option value="month">30 ngày qua</option>
-                            <option value="custom">Tùy chọn</option>
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="week">Last 7 days</option>
+                            <option value="month">Last 30 days</option>
+                            <option value="custom">Custom</option>
                         </select>
                     </div>
                     <div>
-                        <label for="startDate" class="block text-sm font-medium text-gray-700">Từ ngày</label>
+                        <label for="startDate" class="block text-sm font-medium text-gray-700">From date</label>
                         <input type="date" id="startDate" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm">
                     </div>
                     <div>
-                        <label for="endDate" class="block text-sm font-medium text-gray-700">Đến ngày</label>
+                        <label for="endDate" class="block text-sm font-medium text-gray-700">To date</label>
                         <input type="date" id="endDate" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm">
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                         <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-gray-600 text-sm">Tổng doanh thu</p>
+                        <p class="text-gray-600 text-sm">Total revenue</p>
                         <p class="text-2xl font-bold text-green-600" id="totalRevenue">0 đ</p>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                         <i class="fas fa-box text-blue-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-gray-600 text-sm">Tổng đơn hàng</p>
+                        <p class="text-gray-600 text-sm">Total orders</p>
                         <p class="text-2xl font-bold text-blue-600" id="totalOrders">0</p>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                         <i class="fas fa-chart-line text-yellow-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-gray-600 text-sm">Giá trị TB/đơn</p>
+                        <p class="text-gray-600 text-sm">Average order value</p>
                         <p class="text-2xl font-bold text-yellow-600" id="avgOrderValue">0 đ</p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                         <i class="fas fa-check-circle text-green-600 text-xl"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-gray-600 text-sm">Tỷ lệ thành công</p>
+                        <p class="text-gray-600 text-sm">Success rate</p>
                         <p class="text-2xl font-bold text-green-600" id="successRate">0%</p>
                     </div>
                 </div>
@@ -125,19 +125,19 @@
         <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 mb-6">
             <!-- Revenue Chart -->
             <div class="bg-white shadow-sm rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Doanh thu theo thời gian</h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Revenue over time</h3>
                 <canvas id="revenueChart"></canvas>
             </div>
 
             <!-- Orders Chart -->
             <div class="bg-white shadow-sm rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Số lượng đơn hàng</h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Orders volume</h3>
                 <canvas id="ordersChart"></canvas>
             </div>
 
             <!-- Area Performance -->
             <div class="bg-white shadow-sm rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Hiệu suất theo khu vực</h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Performance by area</h3>
                 <canvas id="areaChart"></canvas>
             </div>
 
@@ -152,13 +152,13 @@
                                     Shipper
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Đơn hoàn thành
+                                    Completed orders
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Tỷ lệ thành công
+                                    Success rate
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Đánh giá TB
+                                    Avg. rating
                                 </th>
                             </tr>
                         </thead>
@@ -173,16 +173,16 @@
         <!-- Detailed Statistics -->
         <div class="bg-white shadow-sm rounded-lg overflow-hidden">
             <div class="p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Chi tiết thống kê</h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Detailed statistics</h3>
                 <table id="statsTable" class="w-full">
                     <thead>
                         <tr>
-                            <th>Ngày</th>
-                            <th>Tổng đơn</th>
-                            <th>Hoàn thành</th>
-                            <th>Thất bại</th>
-                            <th>Doanh thu</th>
-                            <th>Tỷ lệ thành công</th>
+                            <th>Date</th>
+                            <th>Total orders</th>
+                            <th>Completed</th>
+                            <th>Failed</th>
+                            <th>Revenue</th>
+                            <th>Success rate</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -204,7 +204,7 @@
         statsTable = $('#statsTable').DataTable({
             order: [[0, 'desc']],
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json'
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/en-GB.json'
             }
         });
 
@@ -229,7 +229,7 @@
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Doanh thu',
+                    label: 'Revenue',
                     data: [],
                     borderColor: 'rgb(34, 197, 94)',
                     tension: 0.1
@@ -242,7 +242,7 @@
                         beginAtZero: true,
                         ticks: {
                             callback: function(value) {
-                                return new Intl.NumberFormat('vi-VN', {
+                                return new Intl.NumberFormat('en-US', {
                                     style: 'currency',
                                     currency: 'VND'
                                 }).format(value);
@@ -261,12 +261,12 @@
                 labels: [],
                 datasets: [
                     {
-                        label: 'Hoàn thành',
+                        label: 'Completed',
                         data: [],
                         backgroundColor: 'rgb(34, 197, 94)',
                     },
                     {
-                        label: 'Thất bại',
+                        label: 'Failed',
                         data: [],
                         backgroundColor: 'rgb(239, 68, 68)',
                     }
@@ -287,9 +287,9 @@
         areaChart = new Chart(areaCtx, {
             type: 'radar',
             data: {
-                labels: ['Miền Bắc', 'Miền Trung', 'Miền Nam'],
+                labels: ['North', 'Central', 'South'],
                 datasets: [{
-                    label: 'Tỷ lệ thành công',
+                    label: 'Success rate',
                     data: [],
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     borderColor: 'rgb(59, 130, 246)',
@@ -373,7 +373,7 @@
             updateStatisticsTable(data.daily_statistics || []);
         } catch (error) {
             console.error('Error loading report data:', error);
-            alert('Có lỗi khi tải dữ liệu báo cáo. Vui lòng thử lại.');
+            alert('Error loading report data. Please try again.');
         }
     }
 
@@ -448,7 +448,7 @@
 
     // Helper function for rating stars
     function getRatingStars(rating) {
-        if (!rating) return 'Chưa có đánh giá';
+        if (!rating) return 'No ratings yet';
         
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 >= 0.5;
@@ -462,7 +462,7 @@
 
     // Helper function to format currency
     function formatCurrency(value) {
-        return new Intl.NumberFormat('vi-VN', {
+        return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'VND'
         }).format(value);
