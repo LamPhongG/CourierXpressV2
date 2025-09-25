@@ -26,9 +26,6 @@
                 <h2 class="text-3xl font-bold text-gray-900">Orders Management</h2>
                 <p class="mt-2 text-gray-600">View and manage all orders in the system</p>
             </div>
-            <button onclick="showCreateOrderModal()" class="bg-primary hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-                <i class="fas fa-plus mr-2"></i> Create order
-            </button>
         </div>
     </div>
 
@@ -148,89 +145,7 @@
         </div>
     </div>
 
-    <!-- Create/Edit Order Modal -->
-    <div id="orderModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Create new order</h3>
-                    <button onclick="hideOrderModal()" class="text-gray-400 hover:text-gray-500">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <form id="orderForm" onsubmit="handleOrderSubmit(event)">
-                    <input type="hidden" id="orderId">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="font-medium text-gray-900 mb-4">Sender information</h4>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Full name</label>
-                                    <input type="text" id="senderName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Phone number</label>
-                                    <input type="tel" id="senderPhone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Address</label>
-                                    <textarea id="senderAddress" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-gray-900 mb-4">Receiver information</h4>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Full name</label>
-                                    <input type="text" id="receiverName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Phone number</label>
-                                    <input type="tel" id="receiverPhone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Address</label>
-                                    <textarea id="receiverAddress" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <h4 class="font-medium text-gray-900 mb-4">Order details</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">Package type</label>
-                                <select id="packageType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                    <option value="document">Documents</option>
-                                    <option value="parcel">Parcel</option>
-                                    <option value="food">Food</option>
-                                    <option value="fragile">Fragile</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">Weight (kg)</label>
-                                <input type="number" id="weight" step="0.1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">COD (VND)</label>
-                                <input type="number" id="cod" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700">Note</label>
-                            <textarea id="note" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"></textarea>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Create order
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <!-- Create/Edit Order Modal removed -->
 
     <!-- View Order Modal -->
     <div id="viewOrderModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center">
@@ -291,12 +206,9 @@
                     data: null,
                     render: function(data) {
                         return `
-                            <div class=\"flex space-x-2\">
-                                <button onclick=\"viewOrder('${data.id}')\" class=\"text-blue-600 hover:text-blue-900\">
-                                    <i class=\"fas fa-eye\"></i>
-                                </button>
-                                <button onclick=\"editOrder('${data.id}')\" class=\"text-yellow-600 hover:text-yellow-900\">
-                                    <i class=\"fas fa-edit\"></i>
+                            <div class="flex space-x-2">
+                                <button onclick="viewOrder('${data.id}')" class="text-blue-600 hover:text-blue-900">
+                                    <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         `;
@@ -407,18 +319,9 @@
         $('#issueOrders').text(stats.issue);
     }
 
-    // Show create order modal
-    function showCreateOrderModal() {
-        $('#modalTitle').text('Tạo đơn hàng mới');
-        $('#orderId').val('');
-        $('#orderForm')[0].reset();
-        $('#orderModal').removeClass('hidden').addClass('flex');
-    }
+    // Removed create order modal trigger (showCreateOrderModal) as create action is disabled
 
-    // Hide order modal
-    function hideOrderModal() {
-        $('#orderModal').removeClass('flex').addClass('hidden');
-    }
+    // Removed hideOrderModal (create/edit disabled)
 
     // Hide view order modal
     function hideViewOrderModal() {
@@ -482,66 +385,9 @@
         }
     }
 
-    // Edit order
-    function editOrder(id) {
-        const order = orders.find(o => o.id === id);
-        if (!order) return;
+    // Removed editOrder (create/edit disabled)
 
-        $('#modalTitle').text('Chỉnh sửa đơn hàng #' + id);
-        $('#orderId').val(order.id);
-        $('#senderName').val(order.sender_name);
-        $('#senderPhone').val(order.sender_phone);
-        $('#senderAddress').val(order.pickup_address);
-        $('#receiverName').val(order.receiver_name);
-        $('#receiverPhone').val(order.receiver_phone);
-        $('#receiverAddress').val(order.delivery_address);
-        $('#packageType').val(order.package_type);
-        $('#weight').val(order.weight);
-        $('#cod').val(order.cod);
-        $('#note').val(order.note);
-
-        $('#orderModal').removeClass('hidden').addClass('flex');
-    }
-
-    // Handle order form submission
-    async function handleOrderSubmit(event) {
-        event.preventDefault();
-
-        const formData = {
-            sender_name: $('#senderName').val(),
-            sender_phone: $('#senderPhone').val(),
-            pickup_address: $('#senderAddress').val(),
-            receiver_name: $('#receiverName').val(),
-            receiver_phone: $('#receiverPhone').val(),
-            delivery_address: $('#receiverAddress').val(),
-            package_type: $('#packageType').val(),
-            weight: $('#weight').val(),
-            cod: $('#cod').val(),
-            note: $('#note').val()
-        };
-
-        try {
-            const editingId = $('#orderId').val();
-            const url = editingId ? `/api/admin/orders/${editingId}` : '/api/admin/orders';
-            const method = editingId ? 'PUT' : 'POST';
-            const response = await fetch(url, {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) throw new Error('Network response was not ok');
-
-            hideOrderModal();
-            loadOrders();
-            alert(editingId ? 'Cập nhật đơn hàng thành công!' : 'Tạo đơn hàng thành công!');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
-        }
-    }
+    // Removed handleOrderSubmit (create/edit disabled)
 
     // Check authentication on page load
     document.addEventListener('DOMContentLoaded', function() {

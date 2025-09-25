@@ -199,6 +199,7 @@
                 { 
                     data: 'status',
                     title: 'Status',
+                    defaultContent: 'active',
                     render: function(data, type, row) {
                         if (type === 'display') {
                             const statusClasses = {
@@ -254,14 +255,22 @@
     // Load agents data
     async function loadAgents() {
         try {
-            const response = await fetch('/dev/test-agents-api', {
+            const response = await fetch('/api/admin/agents', {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
             });
             
             if (!response.ok) {
+                if (response.status === 401 || response.status === 419) {
+                    throw new Error('Bạn chưa đăng nhập hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.');
+                }
+                if (response.status === 403) {
+                    throw new Error('Bạn không có quyền truy cập danh sách agents.');
+                }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
@@ -291,7 +300,7 @@
             console.error('Error loading agents:', error);
             agents = [];
             table.clear().draw();
-            alert('Có lỗi khi tải dữ liệu agents. Vui lòng kiểm tra console để xem chi tiết.');
+            alert(error.message || 'Có lỗi khi tải dữ liệu agents. Vui lòng kiểm tra console để xem chi tiết.');
         }
     }
 
@@ -379,12 +388,27 @@
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify(formData)
             });
 
-            if (!response.ok) throw new Error('Network response was not ok');
+            if (!response.ok) {
+                if (response.status === 422) {
+                    const err = await response.json();
+                    const messages = err.errors ? Object.values(err.errors).flat().join('\n') : 'Dữ liệu không hợp lệ';
+                    throw new Error(messages);
+                }
+                if (response.status === 401 || response.status === 419) {
+                    throw new Error('Bạn chưa đăng nhập hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.');
+                }
+                if (response.status === 403) {
+                    throw new Error('Bạn không có quyền thực hiện thao tác này.');
+                }
+                throw new Error('Yêu cầu không thành công.');
+            }
 
             const result = await response.json();
             
@@ -393,11 +417,11 @@
                 loadAgents();
                 alert(formData.id ? 'Updated successfully!' : 'Created successfully!');
             } else {
-                alert(result.message || 'An error occurred');
+                alert(result.message || 'Đã xảy ra lỗi');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Please try again.');
+            alert(error.message || 'Đã xảy ra lỗi. Vui lòng thử lại.');
         }
     }
 

@@ -29,8 +29,9 @@ Route::middleware(['web', 'auth'])->group(function () {
         
         // Order management
         Route::apiResource('/orders', \App\Http\Controllers\Admin\OrderController::class);
-        Route::get('/agents', [\App\Http\Controllers\Admin\OrderController::class, 'getAgents'])->name('agents');
-        Route::get('/shippers', [\App\Http\Controllers\Admin\OrderController::class, 'getShippers'])->name('shippers');
+        // Avoid conflict with agents resource: expose order helpers under /orders/* paths
+        Route::get('/orders/agents', [\App\Http\Controllers\Admin\OrderController::class, 'getAgents'])->name('orders.agents');
+        Route::get('/orders/shippers', [\App\Http\Controllers\Admin\OrderController::class, 'getShippers'])->name('orders.shippers');
         
         // Reports
         Route::get('/reports', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports');
